@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="header">
+    <div class="container">
+        <nav>
+            <img src="images/logo2.png" class="logo">
+            <ul id="sidemenu">
+                <li><a href="#header">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <i class="fas fa-times" onclick="closemenu()"></i>
+            </ul>
+            <i class="fas fa-bars" onclick="openmenu()"></i>
+        </nav>
+        <div class="header-text">
+            <h3>Solutions and Support - YOU NEED!
+            </h3>
+            <h1> <span>#ISupportYou</span></h1><br>
+            <p>"Our passion is to deliver personalised services and support individuals and businesses to the best of our abilities and resources, connecting them to our local and global network and partners, and empowering them to thrive worldwide!"
+            </p>
+        </div>
+    </div>
+</div>
+<!-- -----------about---------- -->
+<div id="about">
+    <div class="container">
+        <div class="row">
+            <div class="about-col-1">
+                <img src="images/about us.png">
+            </div>
+            <div class="about-col-2">
+                <h1 class="sub-title">Who do we help?</h1>
+                <p>Empowering Ambitious Businesses<br>
+
+                    <br>We support small to mid-sized businesses, startups, and entrepreneurs, providing expert guidance, resources, and strategic solutions to:
+                    
+                    Establish a strong foundation
+                    Drive growth and expansion
+                    Navigate challenges
+                    Seize new opportunities.
+                    Together, let's unlock your business potential!</p>
+                <div class="tab-titles">
+                    <p class="tab-links active-link" onclick="opentab('skills')">How We Help</p>
+                    <p class="tab-links" onclick="opentab('experience')">Our Approach</p>
+                    <p class="tab-links" onclick="opentab('education')">Execution Process</p>
+                </div>
+                <div class="tab-contents active-tab" id="skills">
+                    <ul>
+                        <li><span>Step 1: Listen</span><br>We take the time to understand your business, goals, and challenges through detailed consultations.</li>
+                        <li><span>Step 2: Propose Solutions</span><br>We craft personalized strategies and recommendations tailored to your business needs.</li>
+                        <li><span>Step 3: Implementations</span><br>We work alongside you to execute the strategies, ensuring measurable outcomes and success.</li>
+                    </ul>
+                </div>
+                
+                <div class="tab-contents" id="experience">
+                    <ul>
+                        <li><span>Understanding Your Business</span><br>We assess your business model, industry trends, and key pain points to create a structured roadmap for growth.</li>
+                        <li><span>Strategic Planning</span><br>Our team collaborates with you to develop an actionable plan, identifying necessary resources and opportunities.</li>
+                        <li><span>Connecting You to the Right Resources</span><br>We leverage our network and expertise to link you with the right professionals, tools, and funding opportunities.</li>
+                    </ul>
+                </div>
+                
+                <div class="tab-contents" id="education">
+                    <ul>
+                        <li><span>Monitoring & Support</span><br>We continuously track progress, analyze performance, and fine-tune strategies to optimize results.</li>
+                        <li><span>Adaptation & Scaling</span><br>Our support extends beyond implementation, helping businesses scale efficiently with the right growth tactics.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ---------services---------------- -->
+<div id="services">
+    <div class="container">
+        <h1 class="sub-title">Our Services</h1>
+        <div class="services-list">
+            <div>
+                <i class="fas fa-brain"></i>
+                <h2>Transform Your Business Mindset</h2>
+                <p>Coaching for entrepreneurial success, helping business owners develop a strong mindset, improve decision-making, and enhance leadership skills.</p>
+               
+            </div>
+            <div>
+                <i class="fas fa-user-tie"></i>
+                <h2>Build Your Personal Brand</h2>
+                <p>Helping professionals establish their unique identity, grow their network, and stand out in competitive industries.</p>
+               
+            </div>
+            <div>
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h2>Grow with Training and Development</h2>
+                <p>Developing essential business skills, sales training, and leadership development programs for individuals and teams.</p>
+               
+            </div>
+            <div>
+                <i class="fas fa-laptop-code"></i>
+                <h2>Total IT Solutions</h2>
+                <p>Website development, social media management, SEO optimization, and digital marketing strategies for businesses.</p>
+            
+            </div>
+            <div>
+                <i class="fas fa-bullhorn"></i>
+                <h2>Powerful Marketing Strategies</h2>
+                <p>Content marketing, social media advertising, and organic/paid campaigns to maximize brand visibility.</p>
+               
+            </div>
+            <div>
+                <i class="fas fa-chart-line"></i>
+                <h2>Generate More Leads</h2>
+                <p>Helping businesses expand their customer base by leveraging data-driven marketing and outreach strategies.</p>
+             
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ----------portfolio------------ -->
+<div id="portfolio">
+    <div class="container">
+        <h1 class="sub-title">Our Work</h1>
+        <div class="work-list">
+            <div class="work">
+                <img src="images/IMG_0398.jpeg">
+                <div class="layer">
+                    <h3>The UNSCRIPTED PODCAST show</h3>
+                    <p>The UNSCRIPTED PODCAST show features 25 of our #ISupportYourBusiness members and their journey of life and ENTREPRENEURSHIP and the challenges and struggles faced.</p>
+                    <a href="#"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/project2.webp"  width="400" height="350">
+                <div class="layer">
+                    <h3>Grants</h3>
+                    <p>We have an experienced team of grant writers here in Canada to support businesses especially small businesses and start-ups with various grants. In 2024 we helped 3 businesses with securing 50k CAD each towards their IT infrastructure development from the Canada Digital Adoption program.</p>
+                    <a href="#"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/project3.png"  width="600" height="350">
+                <div class="layer">
+                    <h3>Website projects</h3>
+                    <p>Our experienced and diversified team of developers have supported and built quite a few websites for small businesses here in Canada</p>
+                    <a href="#"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/project4.png" width="600" height="350">
+                <div class="layer">
+                    <h3>#ISupportYourBusiness Community Learning Management System (LMS) platform</h3>
+                    <p>Developed and implemented a LMS platform for global businesses to record content and sell them online, globally -</p>
+                    <a href="https://www.isupportyourbusiness.com/s/store"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/Photo from Kaustav Ghosh.jpg" width="600" height="350">
+                <div class="layer">
+                    <h3>Coast Salish Wool - Investment and turnkey project</h3>
+                    <p>Our experienced team helped an indigenous business our of Vancouver island to setup their entire business operations through and business plan, investor alignment and turnkey business operations.</p>
+                    <a href="#"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/4.jpg" width="600" height="350">
+                <div class="layer">
+                    <h3>Collaborate, Connect, Grow - Weekly Business Meetups</h3>
+                    <p>A space for entrepreneurs and small business owners to share challenges, find solutions, and build powerful networks—every week.</p>
+                    <a href="#"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/3(4).jpg" width="600" height="350">
+                <div class="layer">
+                    <h3>"Empowering Growth Through Personalized 1-on-1 Business Meetings"</h3>
+                    <p>Personalized sessions to guide, support, and strategize your next business move—focused entirely on you.</p>
+                    <a href="#"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/3(5).jpg" width="600" height="350">
+                <div class="layer">
+                    <h3>Connecting Entrepreneurs Across the Globe</h3>
+                    <p>Bringing together visionaries, innovators, and changemakers from different countries to share insights, collaborate, and grow—together.</p>
+                    <a href="#"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+
+        </div>
+        <a href="#" class="btn">See more</a>
+    </div>
+</div>
+
+<div id="team">
+    <div class="container">
+        <h1 class="sub-title">Our Team</h1>
+        <div class="work-list">
+            <div class="work">
+                <img src="images/IMG_0394.jpg">
+                <div class="layer">
+                    <h3>Kaustav Ghosh</h3>
+                    <p>Mindset Business Coach</p>
+                    <a href="http://linkedin.com/in/kaustav-ghosh"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/IMG_0393.jpg">
+                <div class="layer">
+                    <h3>Sandra Baron</h3>
+                    <p>Business AI Solutions Advisor</p>
+                    <a href="http://linkedin.com/in/sjbonpassive"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/IMG_0395.jpg">
+                <div class="layer">
+                    <h3>Lori Bourassa</h3>
+                    <p>Solutions Consultant</p>
+                    <a href="http://linkedin.com/in/lori-bourassa-5881aa42"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ----------contact------------- -->
+<div id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="contact-left">
+                <h1 class="sub-title">Contact Us</h1>
+                <p><i class="fas fa-paper-plane"></i> isupportyou@gmail.com</p>
+                <p><i class="fas fa-phone-square-alt"></i> 0123456789</p>
+                <div class="social-icons">
+                    <a href="https://facebook.com/"><i class="fab fa-facebook"></i></a>
+                    <a href=""><i class="fab fa-twitter-square"></i></a>
+                    <a href=""><i class="fab fa-instagram"></i></a>
+                    <a href=""><i class="fab fa-linkedin"></i></a>
+                </div>
+                <a href="images/my-cv.pdf" download class="btn btn2">Download form</a>
+            </div>
+            <div class="contact-right">
+                <form name="submit-to-google-sheet">
+                    <input type="text" name="Name" placeholder="Your Name" required>
+                    <input type="email" name="Email" placeholder="Your Email" required>
+                    <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                    <button type="submit" class="btn btn2">Submit</button>
+                </form>
+                <span id="msg"></span>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>Copyright © Isupportyou </p>
+    </div>
+</div>
+
+
+
+<script>
+
+    var tablinks = document.getElementsByClassName("tab-links");
+    var tabcontents = document.getElementsByClassName("tab-contents");
+
+    function opentab(tabname){
+        for(tablink of tablinks){
+            tablink.classList.remove("active-link");
+        }
+        for(tabcontent of tabcontents){
+            tabcontent.classList.remove("active-tab");
+        }
+        event.currentTarget.classList.add("active-link");
+        document.getElementById(tabname).classList.add("active-tab");
+    }
+
+</script>
+
+<script>
+
+    var sidemeu = document.getElementById("sidemenu");
+
+    function openmenu(){
+        sidemeu.style.right = "0";
+    }
+    function closemenu(){
+        sidemeu.style.right = "-200px";
+    }
+
+</script>
+<script>
+    const scriptURL = '< add you own link here >' // add your own app script link here
+    const form = document.forms['submit-to-google-sheet']
+    const msg = document.getElementById("msg")
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+            msg.innerHTML = "Message sent successfully"
+            setTimeout(function(){
+                msg.innerHTML = ""
+            },5000)
+            form.reset()
+        })
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
+</body>
+</html>
