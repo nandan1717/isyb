@@ -1,486 +1,560 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ISupportYou - Business Solutions & Support</title>
-    <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>Project Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .tab-button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        .tab-button:hover,
+        .tab-button.active {
+            background: rgba(255, 255, 255, 0.9);
+            color: #667eea;
+            border-color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .project-card.hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+        }
+
+        .card-image {
+            height: 200px;
+            background: linear-gradient(45deg, #f0f2f5, #e1e5e9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .project-card:hover .card-image::before {
+            transform: translateX(100%);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .project-summary {
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .category-tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .see-more-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .see-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .category-section {
+            margin-bottom: 4rem;
+        }
+
+        .category-title {
+            color: white;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .filter-tabs {
+                gap: 0.5rem;
+            }
+
+            .tab-button {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        .stats-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+    </style>
 </head>
-
 <body>
-    <!-- Loading Screen -->
-    <div class="loader" id="loader">
-        <div class="spinner"></div>
+    <div class="container">
+        <div class="header">
+            <h1>Project Portfolio</h1>
+            <p>Showcasing innovative solutions across digital platforms, community initiatives, and business growth ventures</p>
+        </div>
+
+        <div class="filter-tabs">
+            <button class="tab-button active" data-category="all">All Projects</button>
+            <button class="tab-button" data-category="digital">Digital Solutions</button>
+            <button class="tab-button" data-category="media">Publications & Media</button>
+            <button class="tab-button" data-category="community">Community & Networking</button>
+            <button class="tab-button" data-category="business">Business Growth</button>
+            <button class="tab-button" data-category="indigenous">Indigenous Ventures</button>
+            <button class="tab-button" data-category="social">Social Media</button>
+        </div>
+
+        <div class="projects-grid" id="projectsGrid">
+            <!-- Digital Solutions -->
+            <div class="project-card" data-category="digital">
+                <div class="card-image">💻</div>
+                <div class="card-content">
+                    <h3 class="project-title">#ISupportYourBusiness LMS Platform</h3>
+                    <p class="project-summary">Comprehensive learning management system designed to support business growth through structured educational content and interactive modules.</p>
+                    <div class="card-footer">
+                        <span class="category-tag">Digital Solutions</span>
+                        <a href="#" class="see-more-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="digital">
+                <div class="card-image">🌐</div>
+                <div class="card-content">
+                    <h3 class="project-title">Website Development</h3>
+                    <p class="project-summary">Custom website solutions for Cheques and Robert Arthur, featuring responsive design and optimized user experience.</p>
+                    <div class="card-footer">
+                        <span class="category-tag">Digital Solutions</span>
+                        <a href="#" class="see-more-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Publications & Media -->
+            <div class="project-card" data-category="media">
+                <div class="card-image">📚</div>
+                <div class="card-content">
+                    <h3 class="project-title">UNSCRIPTED 2025 Book</h3>
+                    <p class="project-summary">Groundbreaking publication exploring authentic storytelling and unfiltered perspectives in modern business and life.</p>
+                    <div class="card-footer">
+                        <span class="category-tag">Publications</span>
+                        <a href="#" class="see-more-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="media">
+                <div class="card-image">🎙️</div>
+                <div class="card-content">
+                    <h3 class="project-title">UNSCRIPTED Podcast Show</h3>
+                    <p class="project-summary">Dynamic podcast series featuring raw conversations with industry leaders, available on Spotify and major platforms.</p>
+                    <div class="card-footer">
+                        <span class="category-tag">Media</span>
+                        <a href="#" class="see-more-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Community & Networking -->
+            <div class="project-card" data-category="community">
+                <div class="card-image">🤝</div>
+                <div class="card-content">
+                    <h3 class="project-title">2nd Thursday Monthly Meetings</h3>
+                    <p class="project-summary">Regular networking events fostering community connections and business collaborations among local entrepreneurs.</p>
+                    <div class="card-footer">
+                        <span class="category-tag">Community</span>
+                        <a href="#" class="see-more-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="community">
+                <div class="card-image">🎯</div>
+                <div class="card-content">
+                    <h3 class="project-title">Workshops, Training & Coaching</h3>
+                    <p class="project-summary">Comprehensive educational programs delivering practical skills and strategic insights across multiple business domains.</p>
+                    <div class="card-footer">
+                        <span class="category-tag">Training</span>
+                        <a href="#" class="see-more-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Business Growth & Funding -->
+            <div class="project-card" data-category="business">
+                <div class="card-image">💰</div>
+                <div class="card-content">
+                    <h3 class="project-title">Grants Support</h3>
+                    <p class="project-summary">Strategic assistance with Canada Digital Adoption Program and other funding opportunities for business digitization.</p>
+                    <div class="card-footer">
+                        <span class="category-tag">Funding</span>
+                        <a href="#" class="see-more-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="business">
+                <div class="card-image">⛏️</div>
+                <div class="card-content">
+                    <h3 class="project-title">Papua New Guinea Gold Mine</h3>
+                    <p class="project-summary">International mining venture showcasing cross-border business development and resource management expertise.</p>
+                    <div class="card-footer">
+                        <span class="category-tag">International</span>
+                        <a href="#" class="see-more-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="business">
+                <div class="card-image">📱</div>
+                <div class="card-content">
+                    <h3 class="project-title">Rogers Sub Dealership</h3>
+                    <p class="project-summary">Telecommunications retail partnership providing mobile solutions and services to local communities.</p>
+                    <div class="card-footer">
+                        <span class="category-tag">Retail</span>
+                        <a href="#" class="see-more-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Indigenous & Community Ventures -->
+            <div class="project-card" data-category="indigenous">
+                <div class="card-image">🧶</div>
+                <div class="card-content">
+                    <h3 class="project-title">Coast Salish Wool</h3>
+                    <p class="project-summary">Traditional textile venture celebrating Indigenous heritage while creating sustainable economic opportunities in the community.</p>
+                    <div class="card-footer">
+                        <span class="category-tag">Indigenous</span>
+                        <a href="#" class="see-more-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Media Campaigns -->
+            <div class="project-card" data-category="social">
+                <div class="card-image">🍽️</div>
+                <div class="card-content">
+                    <h3 class="project-title">Samantha Food Blog</h3>
+                    <p class="project-summary">Engaging Instagram content strategy showcasing culinary creativity and building authentic food community connections.</p>
+                    <div class="card-footer">
+                        <span class="category-tag">Social Media</span>
+                        <a href="#" class="see-more-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="social">
+                <div class="card-image">💳</div>
+                <div class="card-content">
+                    <h3 class="project-title">YES Payments by Nirmal</h3>
+                    <p class="project-summary">Strategic social media campaign promoting innovative payment solutions through targeted Instagram marketing and engagement.</p>
+                    <div class="card-footer">
+                        <span class="category-tag">FinTech</span>
+                        <a href="#" class="see-more-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <h2>Portfolio Impact</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">12</span>
+                    <div class="stat-label">Active Projects</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">6</span>
+                    <div class="stat-label">Industry Sectors</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100+</span>
+                    <div class="stat-label">Clients Served</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">5</span>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!-- Header Section -->
-    <header id="header">
-        <div class="container">
-            <nav>
-                <a href="index.html" class="logo">ISupportYou</a>
-                <ul id="nav-menu">
-                    <li><a href="#header" class="nav-link active">Home</a></li>
-                    <li><a href="#about" class="nav-link">About</a></li>
-                    <li><a href="#services" class="nav-link">Services</a></li>
-                    <li><a href="#portfolio" class="nav-link">Projects</a></li>
-                    <li><a href="#team" class="nav-link">Team</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
-                </ul>
-                <button class="mobile-menu-btn" id="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </nav>
-
-            
-    </header>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-overlay" id="mobile-overlay"></div>
-    <div class="mobile-menu" id="mobile-menu">
-        <ul>
-            <li><a href="#header" class="nav-link">Home</a></li>
-            <li><a href="#about" class="nav-link">About</a></li>
-            <li><a href="#services" class="nav-link">Services</a></li>
-            <li><a href="#portfolio" class="nav-link">Projects</a></li>
-            <li><a href="#team" class="nav-link">Team</a></li>
-            <li><a href="#contact" class="nav-link">Contact</a></li>
-        </ul>
-    </div>
-
-    
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="section">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll">Our Work</h2>
-            <div class="portfolio-grid">
-                <div class="portfolio-item animate-on-scroll">
-
-                    <img src="images/unscripted podcast.jpeg" alt="Unscripted Podcast">
-
-
-                    <div class="portfolio-overlay">
-                        <h3>The UNSCRIPTED PODCAST show</h3>
-                        <p>Features 25 of our #ISupportYourBusiness members and their journey of life and
-                            entrepreneurship, including challenges and struggles faced.</p>
-                        <a href="https://creators.spotify.com/pod/profile/i-support-your-business/episodes/Epi-002---The-Journey-of-Anjali-Bawa--The-Unscripted-Show-by-ISYB-e2tispt/a-abntdm9"><i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                </div>
-                <div class="portfolio-item animate-on-scroll">
-                    <img src="images/BusinessGrants.webp" alt="Business Grants">
-                    <div class="portfolio-overlay">
-                        <h3>Business Grants</h3>
-                        <p>We have an experienced team of grant writers in Canada supporting businesses with various
-                            grants. In 2024, we helped 3 businesses secure 50k CAD each from the Canada Digital Adoption
-                            program.</p>
-                        <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                </div>
-                <div class="portfolio-item animate-on-scroll">
-                     <img src="images/websiteprojects.png" alt="website Projects">
-                    <div class="portfolio-overlay">
-                        <h3>Website Projects</h3>
-                        <p>Our experienced and diversified team of developers have supported and built quite a few
-                            websites for small businesses here in Canada.</p>
-                        <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                </div>
-                <div class="portfolio-item animate-on-scroll">
-                   <img src="images/ISYBlms.png" alt="ISupportYourBusiness LMS Platform">
-                    <div class="portfolio-overlay">
-                        <h3>#ISupportYourBusiness Community LMS Platform</h3>
-                        <p>Developed and implemented a LMS platform for global businesses to record content and sell
-                            them online, globally.</p>
-                        <a href="https://www.isupportyourbusiness.com/s/store"><i
-                                class="fas fa-external-link-alt"></i></a>
-                    </div>
-                </div>
-                <div class="portfolio-item animate-on-scroll">
-                     <img src="images/Coast Selish Wool.jpg" alt="Coast Salish Wool">
-                    <div class="portfolio-overlay">
-                        <h3>Coast Salish Wool - Investment Project</h3>
-                        <p>Our experienced team helped an indigenous business out of Vancouver Island to setup their
-                            entire business operations through business plan, investor alignment and turnkey operations.
-                        </p>
-                        <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                </div>
-                <div class="portfolio-item animate-on-scroll">
-                   <img src="images/weeklyBusinessMeetup.jpg" alt="Weekly Business Meetups">
-                    <div class="portfolio-overlay">
-                        <h3>Weekly Business Meetups</h3>
-                        <p>A space for entrepreneurs and small business owners to share challenges, find solutions, and
-                            build powerful networks—every week.</p>
-                        <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-    </section>
-
-    
-
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll">Contact Us</h2>
-            <div class="contact-content">
-                <div class="contact-info animate-on-scroll">
-                    <h2>Get in Touch</h2>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>isupportyou@gmail.com</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <span>+1 (123) 456-7890</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Surrey, British Columbia, Canada</span>
-                    </div>
-
-                    <div class="social-links">
-                        <a href="https://facebook.com/"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                    </div>
-
-                    <a href="#" class="btn btn-secondary">
-                        <i class="fas fa-download"></i>
-                        Download Brochure
-                    </a>
-                </div>
-
-                <div class="contact-form animate-on-scroll">
-                    <form id="contact-form">
-                        <div class="form-group">
-                            <input type="text" name="name" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" name="email" placeholder="Your Email" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" name="subject" placeholder="Subject" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea name="message" placeholder="Your Message" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-paper-plane"></i>
-                            Send Message
-                        </button>
-                    </form>
-                    <div class="success-message" id="success-message">
-                        <i class="fas fa-check-circle"></i>
-                        Thank you! Your message has been sent successfully.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer" style="background-color: #222; color: #fff; padding: 40px 0; font-size: 14px;">
-        <div class="container"
-            style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px;">
-
-            <!-- About Section -->
-            <div style="flex: 1; min-width: 220px;">
-                <h3 style="color: var(--primary-color);">ISupportYou</h3>
-                <p>Empowering students and professionals through mentorship, community, and career support. Our mission
-                    is your success.</p>
-            </div>
-
-            <!-- Quick Links -->
-            <div style="flex: 1; min-width: 220px;">
-                <h4 style="color: var(--primary-color);">Quick Links</h4>
-                <ul style="list-style: none; padding: 0;">
-                    <li><a href="/about.html" style="color: #ccc; text-decoration: none;">About Us</a></li>
-                    <li><a href="/services.html" style="color: #ccc; text-decoration: none;">Services</a></li>
-                    <li><a href="/events.html" style="color: #ccc; text-decoration: none;">Events</a></li>
-                    <li><a href="/contact.html" style="color: #ccc; text-decoration: none;">Contact</a></li>
-                </ul>
-            </div>
-
-            <!-- Social Media -->
-            <div style="flex: 1; min-width: 220px;">
-                <h4 style="color: var(--primary-color);">Follow Us</h4>
-                <p>Stay connected with our community:</p>
-                <div style="margin-top: 10px;">
-                    <a href="https://www.instagram.com/" target="_blank" style="color: #ccc; margin-right: 10px;"><i
-                            class="fab fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/" target="_blank" style="color: #ccc; margin-right: 10px;"><i
-                            class="fab fa-linkedin"></i></a>
-                    <a href="https://www.youtube.com/" target="_blank" style="color: #ccc; margin-right: 10px;"><i
-                            class="fab fa-youtube"></i></a>
-                    <a href="https://www.twitter.com/" target="_blank" style="color: #ccc;"><i
-                            class="fab fa-twitter"></i></a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Divider -->
-        <hr style="margin: 30px auto; border-color: #444; width: 90%;">
-
-        <!-- Bottom Credit -->
-        <div style="text-align: center;">
-            <p>&copy; 2024 ISupportYou. All rights reserved.</p>
-            <p>Designed with <i class="fas fa-heart" style="color: var(--primary-color);"></i> by
-                <a href="https://www.linkedin.com/in/nandan-goyal-577b47226" target="_blank"
-                    style="color: var(--primary-color); text-decoration: none;">
-                    Nandan Goyal
-                </a>
-            </p>
-        </div>
-    </footer>
-
-
-    <!-- Scroll to Top Button -->
-    <button class="scroll-top" id="scroll-top">
-        <i class="fas fa-chevron-up"></i>
-    </button>
-
-    <!-- Theme Toggle Button -->
-    <button class="theme-toggle" id="theme-toggle" title="Toggle Theme">
-        <i class="fas fa-moon"></i>
-    </button>
 
     <script>
-        // Loading Screen
-        window.addEventListener('load', function () {
-            const loader = document.getElementById('loader');
-            setTimeout(() => {
-                loader.classList.add('hidden');
-            }, 1000);
-        });
+        // Filter functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const projectCards = document.querySelectorAll('.project-card');
 
-        // Mobile Menu
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileOverlay = document.getElementById('mobile-overlay');
-        const navLinks = document.querySelectorAll('.nav-link');
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
 
-        mobileMenuBtn.addEventListener('click', function () {
-            mobileMenu.classList.toggle('active');
-            mobileOverlay.classList.toggle('active');
+                const category = button.getAttribute('data-category');
 
-            const icon = this.querySelector('i');
-            if (mobileMenu.classList.contains('active')) {
-                icon.className = 'fas fa-times';
-            } else {
-                icon.className = 'fas fa-bars';
-            }
-        });
-
-        mobileOverlay.addEventListener('click', function () {
-            mobileMenu.classList.remove('active');
-            mobileOverlay.classList.remove('active');
-            mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
-        });
-
-        // Close mobile menu when clicking nav links
-        navLinks.forEach(link => {
-            link.addEventListener('click', function () {
-                mobileMenu.classList.remove('active');
-                mobileOverlay.classList.remove('active');
-                mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
+                // Filter project cards
+                projectCards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
             });
         });
 
-        // Smooth Scrolling for Navigation Links
-        navLinks.forEach(link => {
-            link.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-
-                if (targetSection) {
-                    targetSection.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-
-                // Update active nav link
-                navLinks.forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-
-        // Tab Functionality
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
-
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', function () {
-                const targetTab = this.getAttribute('data-tab');
-
-                // Remove active class from all tabs and contents
-                tabBtns.forEach(b => b.classList.remove('active'));
-                tabContents.forEach(c => c.classList.remove('active'));
-
-                // Add active class to clicked tab and corresponding content
-                this.classList.add('active');
-                document.getElementById(targetTab).classList.add('active');
-            });
-        });
-
-        // Scroll Animation
+        // Smooth scroll animation for cards
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
 
-        const observer = new IntersectionObserver(function (entries) {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('animated');
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
+        // Observe all project cards
+        projectCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.8s ease';
+            observer.observe(card);
         });
 
-        // Scroll to Top Button
-        const scrollTopBtn = document.getElementById('scroll-top');
-
-        window.addEventListener('scroll', function () {
-            if (window.pageYOffset > 300) {
-                scrollTopBtn.classList.add('visible');
-            } else {
-                scrollTopBtn.classList.remove('visible');
-            }
-        });
-
-        scrollTopBtn.addEventListener('click', function () {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Contact Form
-        const contactForm = document.getElementById('contact-form');
-        const successMessage = document.getElementById('success-message');
-
-        contactForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            // Simulate form submission
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            submitBtn.disabled = true;
-
-            setTimeout(() => {
-                successMessage.classList.add('show');
-                contactForm.reset();
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-
-                setTimeout(() => {
-                    successMessage.classList.remove('show');
-                }, 5000);
-            }, 2000);
-        });
-
-        // Theme Toggle (Optional feature)
-        const themeToggle = document.getElementById('theme-toggle');
-        let isDarkMode = true;
-
-        themeToggle.addEventListener('click', function () {
-            isDarkMode = !isDarkMode;
-            const icon = this.querySelector('i');
-
-            if (isDarkMode) {
-                icon.className = 'fas fa-moon';
-                document.documentElement.style.setProperty('--dark-bg', '#080808');
-                document.documentElement.style.setProperty('--card-bg', '#1a1a1a');
-            } else {
-                icon.className = 'fas fa-sun';
-                document.documentElement.style.setProperty('--dark-bg', '#f8f9fa');
-                document.documentElement.style.setProperty('--card-bg', '#ffffff');
-                document.documentElement.style.setProperty('--text-white', '#212529');
-                document.documentElement.style.setProperty('--text-light', '#6c757d');
-            }
-        });
-
-        // Active Navigation on Scroll
-        window.addEventListener('scroll', function () {
-            let current = '';
-            const sections = document.querySelectorAll('section');
-
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= (sectionTop - 200)) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
+        // Add click animation to cards
+        projectCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (!e.target.classList.contains('see-more-btn')) {
+                    card.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        card.style.transform = 'translateY(-10px)';
+                    }, 150);
                 }
             });
         });
 
-        // Preload Images (if using real images)
-        function preloadImages() {
-            const images = [
-                // Add your actual image URLs here
-            ];
+        // Animate stats on scroll
+        const statsSection = document.querySelector('.stats-section');
+        const statNumbers = document.querySelectorAll('.stat-number');
 
-            images.forEach(src => {
-                const img = new Image();
-                img.src = src;
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statsObserver.observe(statsSection);
+
+        function animateStats() {
+            statNumbers.forEach((stat, index) => {
+                const finalValue = stat.textContent;
+                const numericValue = parseInt(finalValue.replace(/\D/g, ''));
+                const suffix = finalValue.replace(/\d/g, '');
+                
+                let currentValue = 0;
+                const increment = Math.ceil(numericValue / 50);
+                
+                const timer = setInterval(() => {
+                    currentValue += increment;
+                    if (currentValue >= numericValue) {
+                        currentValue = numericValue;
+                        clearInterval(timer);
+                    }
+                    stat.textContent = currentValue + suffix;
+                }, 30 + (index * 10));
             });
         }
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function () {
-            preloadImages();
-
-            // Add some interactive effects
-            const serviceCards = document.querySelectorAll('.service-card');
-            serviceCards.forEach(card => {
-                card.addEventListener('mouseenter', function () {
-                    this.style.transform = 'translateY(-15px) scale(1.02)';
-                });
-
-                card.addEventListener('mouseleave', function () {
-                    this.style.transform = 'translateY(0) scale(1)';
-                });
+        // Add hover effects to buttons
+        document.querySelectorAll('.see-more-btn').forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.05)';
+            });
+            
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(-2px) scale(1)';
             });
         });
 
-        // Performance optimization
-        let ticking = false;
-        function updateScrollPosition() {
-            // Handle scroll-based animations here
-            ticking = false;
-        }
-
-        window.addEventListener('scroll', function () {
-            if (!ticking) {
-                requestAnimationFrame(updateScrollPosition);
-                ticking = true;
-            }
+        // Parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            
+            document.querySelector('.header').style.transform = `translateY(${rate}px)`;
         });
     </script>
 </body>
-
 </html>
