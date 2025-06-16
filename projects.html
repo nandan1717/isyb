@@ -1,425 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Portfolio</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: #333;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: white;
-        }
-
-        .header h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .filter-tabs {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 3rem;
-        }
-
-        .tab-button {
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-            backdrop-filter: blur(10px);
-        }
-
-        .tab-button:hover,
-        .tab-button.active {
-            background: rgba(255, 255, 255, 0.9);
-            color: #667eea;
-            border-color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .project-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-
-        .project-card.hidden {
-            opacity: 0;
-            transform: translateY(20px);
-            pointer-events: none;
-        }
-
-        .card-image {
-            height: 200px;
-            background: linear-gradient(45deg, #f0f2f5, #e1e5e9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
-        }
-
-        .project-card:hover .card-image::before {
-            transform: translateX(100%);
-        }
-
-        .card-content {
-            padding: 1.5rem;
-        }
-
-        .project-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: #2c3e50;
-        }
-
-        .project-summary {
-            color: #666;
-            line-height: 1.5;
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-        }
-
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .category-tag {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .see-more-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .see-more-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .category-section {
-            margin-bottom: 4rem;
-        }
-
-        .category-title {
-            color: white;
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-            text-align: center;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .filter-tabs {
-                gap: 0.5rem;
-            }
-
-            .tab-button {
-                padding: 0.6rem 1rem;
-                font-size: 0.9rem;
-            }
-        }
-
-        .stats-section {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-top: 3rem;
-            text-align: center;
-            color: white;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            margin-top: 0.5rem;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Project Portfolio</h1>
-            <p>Showcasing innovative solutions across digital platforms, community initiatives, and business growth ventures</p>
-        </div>
+    <!-- Header Section -->
+    <header id="header">
+        <nav>
+            <a href="index.html" class="logo" style="color: black;">ISupportYou</a>
+            <ul id="nav-menu">
+                <li><a href="#header" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#portfolio" class="nav-link">Projects</a></li>
+                <li><a href="#team" class="nav-link">Team</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fas fa-bars"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                        fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                    </svg></i>
+            </button>
+        </nav>
+          <!-- Mobile Menu -->
+    <div class="mobile-overlay" id="mobile-overlay"></div>
+    <div class="mobile-menu" id="mobile-menu">
+        <ul>
+            <li><a href="#header" class="nav-link">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#services" class="nav-link">Services</a></li>
+            <li><a href="#portfolio" class="nav-link">Projects</a></li>
+            <li><a href="#team" class="nav-link">Team</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+    </div>
 
-        <div class="filter-tabs">
-            <button class="tab-button active" data-category="all">All Projects</button>
-            <button class="tab-button" data-category="digital">Digital Solutions</button>
-            <button class="tab-button" data-category="media">Publications & Media</button>
-            <button class="tab-button" data-category="community">Community & Networking</button>
-            <button class="tab-button" data-category="business">Business Growth</button>
-            <button class="tab-button" data-category="indigenous">Indigenous Ventures</button>
-            <button class="tab-button" data-category="social">Social Media</button>
-        </div>
-
-        <div class="projects-grid" id="projectsGrid">
-            <!-- Digital Solutions -->
-            <div class="project-card" data-category="digital">
-                <div class="card-image">💻</div>
-                <div class="card-content">
-                    <h3 class="project-title">#ISupportYourBusiness LMS Platform</h3>
-                    <p class="project-summary">Comprehensive learning management system designed to support business growth through structured educational content and interactive modules.</p>
-                    <div class="card-footer">
-                        <span class="category-tag">Digital Solutions</span>
-                        <a href="#" class="see-more-btn">See More</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="digital">
-                <div class="card-image">🌐</div>
-                <div class="card-content">
-                    <h3 class="project-title">Website Development</h3>
-                    <p class="project-summary">Custom website solutions for Cheques and Robert Arthur, featuring responsive design and optimized user experience.</p>
-                    <div class="card-footer">
-                        <span class="category-tag">Digital Solutions</span>
-                        <a href="#" class="see-more-btn">See More</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Publications & Media -->
-            <div class="project-card" data-category="media">
-                <div class="card-image">📚</div>
-                <div class="card-content">
-                    <h3 class="project-title">UNSCRIPTED 2025 Book</h3>
-                    <p class="project-summary">Groundbreaking publication exploring authentic storytelling and unfiltered perspectives in modern business and life.</p>
-                    <div class="card-footer">
-                        <span class="category-tag">Publications</span>
-                        <a href="#" class="see-more-btn">See More</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="media">
-                <div class="card-image">🎙️</div>
-                <div class="card-content">
-                    <h3 class="project-title">UNSCRIPTED Podcast Show</h3>
-                    <p class="project-summary">Dynamic podcast series featuring raw conversations with industry leaders, available on Spotify and major platforms.</p>
-                    <div class="card-footer">
-                        <span class="category-tag">Media</span>
-                        <a href="#" class="see-more-btn">See More</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Community & Networking -->
-            <div class="project-card" data-category="community">
-                <div class="card-image">🤝</div>
-                <div class="card-content">
-                    <h3 class="project-title">2nd Thursday Monthly Meetings</h3>
-                    <p class="project-summary">Regular networking events fostering community connections and business collaborations among local entrepreneurs.</p>
-                    <div class="card-footer">
-                        <span class="category-tag">Community</span>
-                        <a href="#" class="see-more-btn">See More</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="community">
-                <div class="card-image">🎯</div>
-                <div class="card-content">
-                    <h3 class="project-title">Workshops, Training & Coaching</h3>
-                    <p class="project-summary">Comprehensive educational programs delivering practical skills and strategic insights across multiple business domains.</p>
-                    <div class="card-footer">
-                        <span class="category-tag">Training</span>
-                        <a href="#" class="see-more-btn">See More</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Business Growth & Funding -->
-            <div class="project-card" data-category="business">
-                <div class="card-image">💰</div>
-                <div class="card-content">
-                    <h3 class="project-title">Grants Support</h3>
-                    <p class="project-summary">Strategic assistance with Canada Digital Adoption Program and other funding opportunities for business digitization.</p>
-                    <div class="card-footer">
-                        <span class="category-tag">Funding</span>
-                        <a href="#" class="see-more-btn">See More</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="business">
-                <div class="card-image">⛏️</div>
-                <div class="card-content">
-                    <h3 class="project-title">Papua New Guinea Gold Mine</h3>
-                    <p class="project-summary">International mining venture showcasing cross-border business development and resource management expertise.</p>
-                    <div class="card-footer">
-                        <span class="category-tag">International</span>
-                        <a href="#" class="see-more-btn">See More</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="business">
-                <div class="card-image">📱</div>
-                <div class="card-content">
-                    <h3 class="project-title">Rogers Sub Dealership</h3>
-                    <p class="project-summary">Telecommunications retail partnership providing mobile solutions and services to local communities.</p>
-                    <div class="card-footer">
-                        <span class="category-tag">Retail</span>
-                        <a href="#" class="see-more-btn">See More</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Indigenous & Community Ventures -->
-            <div class="project-card" data-category="indigenous">
-                <div class="card-image">🧶</div>
-                <div class="card-content">
-                    <h3 class="project-title">Coast Salish Wool</h3>
-                    <p class="project-summary">Traditional textile venture celebrating Indigenous heritage while creating sustainable economic opportunities in the community.</p>
-                    <div class="card-footer">
-                        <span class="category-tag">Indigenous</span>
-                        <a href="#" class="see-more-btn">See More</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Social Media Campaigns -->
-            <div class="project-card" data-category="social">
-                <div class="card-image">🍽️</div>
-                <div class="card-content">
-                    <h3 class="project-title">Samantha Food Blog</h3>
-                    <p class="project-summary">Engaging Instagram content strategy showcasing culinary creativity and building authentic food community connections.</p>
-                    <div class="card-footer">
-                        <span class="category-tag">Social Media</span>
-                        <a href="#" class="see-more-btn">See More</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="social">
-                <div class="card-image">💳</div>
-                <div class="card-content">
-                    <h3 class="project-title">YES Payments by Nirmal</h3>
-                    <p class="project-summary">Strategic social media campaign promoting innovative payment solutions through targeted Instagram marketing and engagement.</p>
-                    <div class="card-footer">
-                        <span class="category-tag">FinTech</span>
-                        <a href="#" class="see-more-btn">See More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="stats-section">
+        <div class="stats-section" style="margin-bottom: 65px;">
             <h2>Portfolio Impact</h2>
             <div class="stats-grid">
                 <div class="stat-item">
@@ -440,121 +63,435 @@
                 </div>
             </div>
         </div>
+
+        <div class="search-section">
+            <div class="search-controls">
+                <select id="categorySelect">
+                    <option value="all">All Categories</option>
+                    <option value="digital">Digital Solutions</option>
+                    <option value="media">Publications & Media</option>
+                    <option value="community">Community & Networking</option>
+                    <option value="business">Business Growth</option>
+                    <option value="indigenous">Indigenous Ventures</option>
+                    <option value="social">Social Media</option>
+                </select>
+                <input type="text" id="searchInput"
+                    placeholder="Search projects by title, description, or category..." />
+            </div>
+            <div class="results-info" id="resultsInfo"></div>
+        </div>
+        <div class="projects-grid" id="projectsGrid">
+            <!-- Digital Solutions -->
+            <div class="project-card" data-category="digital">
+                <div class="card-image">💻</div>
+                <div class="card-content">
+                    <h3 class="project-title">#ISupportYourBusiness LMS Platform</h3>
+                    <p class="project-summary">Comprehensive learning management system designed to support business
+                        growth through structured educational content and interactive modules.</p>
+                    <div class="card-footer">
+                        <span class="category-tag">Digital Solutions</span>
+                        <a href="#" class="see-more-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="digital">
+                <div class="card-image">🌐</div>
+                <div class="card-content">
+                    <h3 class="project-title">Website Development</h3>
+                    <p class="project-summary">Custom website solutions for Cheques and Robert Arthur, featuring
+                        responsive design and optimized user experience.</p>
+                    <div class="card-footer">
+                        <span class="category-tag">Digital Solutions</span>
+                        <a href="#" class="see-more-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Publications & Media -->
+            <div class="project-card" data-category="media">
+                <div class="card-image">📚</div>
+                <div class="card-content">
+                    <h3 class="project-title">UNSCRIPTED 2025 Book</h3>
+                    <p class="project-summary">Groundbreaking publication exploring authentic storytelling and
+                        unfiltered perspectives in modern business and life.</p>
+                    <div class="card-footer">
+                        <span class="category-tag">Publications</span>
+                        <a href="#" class="see-more-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="media">
+                <div class="card-image">🎙️</div>
+                <div class="card-content">
+                    <h3 class="project-title">UNSCRIPTED Podcast Show</h3>
+                    <p class="project-summary">Dynamic podcast series featuring raw conversations with industry leaders,
+                        available on Spotify and major platforms.</p>
+                    <div class="card-footer">
+                        <span class="category-tag">Media</span>
+                        <a href="#" class="see-more-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Community & Networking -->
+            <div class="project-card" data-category="community">
+                <div class="card-image">🤝</div>
+                <div class="card-content">
+                    <h3 class="project-title">2nd Thursday Monthly Meetings</h3>
+                    <p class="project-summary">Regular networking events fostering community connections and business
+                        collaborations among local entrepreneurs.</p>
+                    <div class="card-footer">
+                        <span class="category-tag">Community</span>
+                        <a href="#" class="see-more-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="community">
+                <div class="card-image">🎯</div>
+                <div class="card-content">
+                    <h3 class="project-title">Workshops, Training & Coaching</h3>
+                    <p class="project-summary">Comprehensive educational programs delivering practical skills and
+                        strategic insights across multiple business domains.</p>
+                    <div class="card-footer">
+                        <span class="category-tag">Training</span>
+                        <a href="#" class="see-more-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Business Growth & Funding -->
+            <div class="project-card" data-category="business">
+                <div class="card-image">💰</div>
+                <div class="card-content">
+                    <h3 class="project-title">Grants Support</h3>
+                    <p class="project-summary">Strategic assistance with Canada Digital Adoption Program and other
+                        funding opportunities for business digitization.</p>
+                    <div class="card-footer">
+                        <span class="category-tag">Funding</span>
+                        <a href="#" class="see-more-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="business">
+                <div class="card-image">⛏️</div>
+                <div class="card-content">
+                    <h3 class="project-title">Papua New Guinea Gold Mine</h3>
+                    <p class="project-summary">International mining venture showcasing cross-border business development
+                        and resource management expertise.</p>
+                    <div class="card-footer">
+                        <span class="category-tag">International</span>
+                        <a href="#" class="see-more-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="business">
+                <div class="card-image">📱</div>
+                <div class="card-content">
+                    <h3 class="project-title">Rogers Sub Dealership</h3>
+                    <p class="project-summary">Telecommunications retail partnership providing mobile solutions and
+                        services to local communities.</p>
+                    <div class="card-footer">
+                        <span class="category-tag">Retail</span>
+                        <a href="#" class="see-more-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Indigenous & Community Ventures -->
+            <div class="project-card" data-category="indigenous">
+                <div class="card-image">🧶</div>
+                <div class="card-content">
+                    <h3 class="project-title">Coast Salish Wool</h3>
+                    <p class="project-summary">Traditional textile venture celebrating Indigenous heritage while
+                        creating sustainable economic opportunities in the community.</p>
+                    <div class="card-footer">
+                        <span class="category-tag">Indigenous</span>
+                        <a href="#" class="see-more-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Media Campaigns -->
+            <div class="project-card" data-category="social">
+                <div class="card-image">🍽️</div>
+                <div class="card-content">
+                    <h3 class="project-title">Samantha Food Blog</h3>
+                    <p class="project-summary">Engaging Instagram content strategy showcasing culinary creativity and
+                        building authentic food community connections.</p>
+                    <div class="card-footer">
+                        <span class="category-tag">Social Media</span>
+                        <a href="#" class="see-more-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="social">
+                <div class="card-image">💳</div>
+                <div class="card-content">
+                    <h3 class="project-title">YES Payments by Nirmal</h3>
+                    <p class="project-summary">Strategic social media campaign promoting innovative payment solutions
+                        through targeted Instagram marketing and engagement.</p>
+                    <div class="card-footer">
+                        <span class="category-tag">FinTech</span>
+                        <a href="#" class="see-more-btn">See More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <footer class="footer" style="background-color: #222; color: #fff; padding: 40px 0; font-size: 14px;">
+            <div class="container"
+                style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px;">
+
+                <!-- About Section -->
+                <div style="flex: 1; min-width: 220px;">
+                    <h3 style="color: var(--primary-color);">ISupportYou</h3>
+                    <p>Empowering students and professionals through mentorship, community, and career support. Our
+                        mission
+                        is your success.</p>
+                </div>
+
+                <!-- Quick Links -->
+                <div style="flex: 1; min-width: 220px;">
+                    <h4 style="color: var(--primary-color);">Quick Links</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><a href="/about.html" style="color: #ccc; text-decoration: none;">About Us</a></li>
+                        <li><a href="/services.html" style="color: #ccc; text-decoration: none;">Services</a></li>
+                        <li><a href="/events.html" style="color: #ccc; text-decoration: none;">Events</a></li>
+                        <li><a href="/contact.html" style="color: #ccc; text-decoration: none;">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Social Media -->
+                <div style="flex: 1; min-width: 220px;">
+                    <h4 style="color: var(--primary-color);">Follow Us</h4>
+                    <p>Stay connected with our community:</p>
+                    <div style="margin-top: 10px;">
+                        <a href="https://www.instagram.com/" target="_blank" style="color: #ccc; margin-right: 10px;"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/" target="_blank" style="color: #ccc; margin-right: 10px;"><i
+                                class="fab fa-linkedin"></i></a>
+                        <a href="https://www.youtube.com/" target="_blank" style="color: #ccc; margin-right: 10px;"><i
+                                class="fab fa-youtube"></i></a>
+                        <a href="https://www.twitter.com/" target="_blank" style="color: #ccc;"><i
+                                class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <hr style="margin: 30px auto; border-color: #444; width: 90%;">
+
+            <!-- Bottom Credit -->
+            <div style="text-align: center;">
+                <p>&copy; 2024 ISupportYou. All rights reserved.</p>
+                <p>Designed with <i class="fas fa-heart" style="color: var(--primary-color);"></i> by
+
+
+                    <a href="http://www.linkedin.com/in/devendra-bisht-0521a4324" target="_blank"
+                        style="color: var(--primary-color); text-decoration: none;">
+                        Devendra Bisht
+                    </a>
+                    &amp;
+                    <a href="https://www.linkedin.com/in/nandan-goyal-577b47226" target="_blank"
+                        style="color: var(--primary-color); text-decoration: none;">
+                        Nandan Goyal
+                    </a>
+                </p>
+            </div>
+
+        </footer>
+
+
+        <!-- Scroll to Top Button -->
+        <button class="scroll-top" id="scroll-top">
+            <i class="fas fa-chevron-up"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5" />
+                </svg></i>
+        </button>
+
+
+        
     </div>
 
-    <script>
-        // Filter functionality
-        const tabButtons = document.querySelectorAll('.tab-button');
-        const projectCards = document.querySelectorAll('.project-card');
 
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Remove active class from all buttons
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                // Add active class to clicked button
-                button.classList.add('active');
+</body>
+<script src="script.js"></script>
+<script>
+    // Get all necessary elements
+const projectCards = document.querySelectorAll('.project-card');
+const searchInput = document.getElementById('searchInput');
+const categorySelect = document.getElementById('categorySelect');
+const resultsInfo = document.getElementById('resultsInfo');
 
-                const category = button.getAttribute('data-category');
+// Function to filter projects
+function filterProjects() {
+    const selectedCategory = categorySelect.value.toLowerCase();
+    const searchQuery = searchInput.value.toLowerCase().trim();
 
-                // Filter project cards
-                projectCards.forEach(card => {
-                    if (category === 'all' || card.getAttribute('data-category') === category) {
-                        card.classList.remove('hidden');
-                    } else {
-                        card.classList.add('hidden');
-                    }
-                });
-            });
-        });
+    let visibleCount = 0;
+    let totalCount = projectCards.length;
 
-        // Smooth scroll animation for cards
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+    projectCards.forEach(card => {
+        const cardCategory = card.getAttribute('data-category').toLowerCase();
+        const cardTitle = card.querySelector('.project-title').textContent.toLowerCase();
+        const cardSummary = card.querySelector('.project-summary').textContent.toLowerCase();
+        const cardTag = card.querySelector('.category-tag').textContent.toLowerCase();
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
+        // Check if card matches category filter
+        const matchesCategory = selectedCategory === 'all' || cardCategory === selectedCategory;
 
-        // Observe all project cards
-        projectCards.forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'all 0.8s ease';
-            observer.observe(card);
-        });
+        // Check if card matches search query (search in title, summary, and tag)
+        const matchesSearch = searchQuery === '' ||
+            cardTitle.includes(searchQuery) ||
+            cardSummary.includes(searchQuery) ||
+            cardTag.includes(searchQuery) ||
+            cardCategory.includes(searchQuery);
 
-        // Add click animation to cards
-        projectCards.forEach(card => {
-            card.addEventListener('click', (e) => {
-                if (!e.target.classList.contains('see-more-btn')) {
-                    card.style.transform = 'scale(0.98)';
-                    setTimeout(() => {
-                        card.style.transform = 'translateY(-10px)';
-                    }, 150);
-                }
-            });
-        });
+        // Show/hide card based on filters
+        if (matchesCategory && matchesSearch) {
+            card.classList.remove('hidden');
+            visibleCount++;
+        } else {
+            card.classList.add('hidden');
+        }
+    });
 
-        // Animate stats on scroll
-        const statsSection = document.querySelector('.stats-section');
-        const statNumbers = document.querySelectorAll('.stat-number');
+    // Update results info
+    updateResultsInfo(visibleCount, totalCount, selectedCategory, searchQuery);
+}
 
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateStats();
-                    statsObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
+// Function to update results information
+function updateResultsInfo(visible, total, category, search) {
+    let message = '';
 
-        statsObserver.observe(statsSection);
-
-        function animateStats() {
-            statNumbers.forEach((stat, index) => {
-                const finalValue = stat.textContent;
-                const numericValue = parseInt(finalValue.replace(/\D/g, ''));
-                const suffix = finalValue.replace(/\d/g, '');
-                
-                let currentValue = 0;
-                const increment = Math.ceil(numericValue / 50);
-                
-                const timer = setInterval(() => {
-                    currentValue += increment;
-                    if (currentValue >= numericValue) {
-                        currentValue = numericValue;
-                        clearInterval(timer);
-                    }
-                    stat.textContent = currentValue + suffix;
-                }, 30 + (index * 10));
-            });
+    if (visible === 0) {
+        message = 'No projects found';
+        if (search) {
+            message += ` for "${search}"`;
+        }
+        if (category !== 'all') {
+            message += ` in ${category} category`;
         }
 
-        // Add hover effects to buttons
-        document.querySelectorAll('.see-more-btn').forEach(btn => {
-            btn.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-3px) scale(1.05)';
-            });
-            
-            btn.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(-2px) scale(1)';
-            });
-        });
+        // Show no results message
+        if (!document.querySelector('.no-results')) {
+            const noResults = document.createElement('div');
+            noResults.className = 'no-results';
+            noResults.innerHTML = `
+                        <h3>No Results Found</h3>
+                        <p>Try adjusting your search terms or selecting a different category.</p>
+                    `;
+            document.getElementById('projectsGrid').appendChild(noResults);
+        }
+    } else {
+        // Remove no results message if it exists
+        const noResults = document.querySelector('.no-results');
+        if (noResults) {
+            noResults.remove();
+        }
 
-        // Parallax effect on scroll
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const rate = scrolled * -0.5;
-            
-            document.querySelector('.header').style.transform = `translateY(${rate}px)`;
-        });
-    </script>
-</body>
+        message = `Showing ${visible} of ${total} projects`;
+        if (category !== 'all') {
+            message += ` in ${category} category`;
+        }
+        if (search) {
+            message += ` matching "${search}"`;
+        }
+    }
+
+    resultsInfo.textContent = message;
+}
+
+// Add event listeners
+searchInput.addEventListener('input', filterProjects);
+categorySelect.addEventListener('change', filterProjects);
+
+// Initialize the filter on page load
+filterProjects();
+
+// Animate stats on page load
+function animateStats() {
+    const statNumbers = document.querySelectorAll('.stat-number');
+
+    statNumbers.forEach((stat, index) => {
+        const finalValue = stat.textContent;
+        const numericValue = parseInt(finalValue.replace(/\D/g, ''));
+        const suffix = finalValue.replace(/\d/g, '');
+
+        let currentValue = 0;
+        const increment = Math.ceil(numericValue / 30);
+
+        const timer = setInterval(() => {
+            currentValue += increment;
+            if (currentValue >= numericValue) {
+                currentValue = numericValue;
+                clearInterval(timer);
+            }
+            stat.textContent = currentValue + suffix;
+        }, 50 + (index * 20));
+    });
+}
+
+// Start stats animation when page loads
+window.addEventListener('load', animateStats);
+
+// Add smooth hover effects to cards
+projectCards.forEach(card => {
+    card.addEventListener('mouseenter', function () {
+        this.style.transform = 'translateY(-15px) scale(1.02)';
+    });
+
+    card.addEventListener('mouseleave', function () {
+        this.style.transform = 'translateY(0) scale(1)';
+    });
+});
+
+// Add click effect to see more buttons
+document.querySelectorAll('.see-more-btn').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            this.style.transform = 'translateY(-2px)';
+        }, 150);
+    });
+});
+
+// Add real-time search feedback
+searchInput.addEventListener('focus', function () {
+    this.style.boxShadow = '0 6px 25px rgba(102, 126, 234, 0.4)';
+});
+
+searchInput.addEventListener('blur', function () {
+    this.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+});
+
+// Add keyboard shortcuts
+document.addEventListener('keydown', function (e) {
+    // Focus search input when pressing '/' key
+    if (e.key === '/' && e.target !== searchInput) {
+        e.preventDefault();
+        searchInput.focus();
+    }
+
+    // Clear search when pressing 'Escape'
+    if (e.key === 'Escape' && e.target === searchInput) {
+        searchInput.value = '';
+        filterProjects();
+    }
+});
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+    crossorigin="anonymous"></script>
+
 </html>
