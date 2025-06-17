@@ -225,41 +225,50 @@
                 <div class="projects-grid" id="projectsGrid">
                     <!-- Digital Solutions -->
                     <div class="project-card" data-category="digital">
-                        <div class="card-image">💻</div>
+                       <div class="image-container">
+                            <img src="images/ISYBlms.png" alt="example">
+                        </div>
+
                         <div class="card-content">
                             <h3 class="project-title">#ISupportYourBusiness LMS Platform</h3>
                             <p class="project-summary">Comprehensive learning management system designed to support
                                 business growth through structured educational content and interactive modules.</p>
                             <div class="card-footer">
                                 <span class="category-tag">Digital Solutions</span>
-                                <a href="#" class="see-more-btn">See More</a>
+                                <a href="https://www.isupportyourbusiness.com/s/store" class="see-more-btn">See More</a>
                             </div>
                         </div>
                     </div>
 
                     <div class="project-card" data-category="digital">
-                        <div class="card-image">🌐</div>
+                        <div class="image-container">
+                            <img src="images/websiteprojects.png" alt="example">
+                        </div>
+
                         <div class="card-content">
                             <h3 class="project-title">Website Development</h3>
                             <p class="project-summary">Custom website solutions for Cheques and Robert Arthur, featuring
                                 responsive design and optimized user experience.</p>
                             <div class="card-footer">
                                 <span class="category-tag">Digital Solutions</span>
-                                <a href="#" class="see-more-btn">See More</a>
+                                <a href="https://www.robertarthurs.com/" class="see-more-btn">See More</a>
                             </div>
                         </div>
                     </div>
 
                     <!-- Publications & Media -->
                     <div class="project-card" data-category="media">
-                        <div class="card-image">📚</div>
+                        <div class="image-container">
+                            <img src="images/unscriptedbook.jpg" alt="example">
+                        </div>
+
                         <div class="card-content">
                             <h3 class="project-title">UNSCRIPTED 2025 Book</h3>
                             <p class="project-summary">Groundbreaking publication exploring authentic storytelling and
                                 unfiltered perspectives in modern business and life.</p>
                             <div class="card-footer">
                                 <span class="category-tag">Publications</span>
-                                <a href="#" class="see-more-btn">See More</a>
+                                <a href="" class="see-more-btn">See More</a>
                             </div>
                         </div>
                     </div>
@@ -274,7 +283,7 @@
     <section class="testimonials-section">
         <div class="testimonials-container">
             <div class="section-header">
-                
+
                 <h2 class="section-title">Testimonials</h2>
                 <p class="section-description">
                     Don't just take our word for it. See what our satisfied clients have to say about their experience
@@ -644,228 +653,228 @@
     crossorigin="anonymous"></script>
 <script src="script.js"></script>
 <script> class TestimonialsSlider {
-            constructor() {
-                this.track = document.getElementById('testimonials-track');
-                this.prevBtn = document.getElementById('prevBtn');
-                this.nextBtn = document.getElementById('nextBtn');
-                this.dotsContainer = document.getElementById('sliderDots');
-                this.autoPlayProgress = document.getElementById('autoPlayProgress');
-                
-                this.currentIndex = 0;
-                this.cardWidth = 380 + 32; // Card width + gap
-                this.visibleCards = this.getVisibleCards();
-                this.totalCards = this.track.children.length;
-                this.maxIndex = Math.max(0, this.totalCards - this.visibleCards);
-                
-                this.autoPlayInterval = null;
-                this.autoPlayDuration = 4000;
-                this.isUserInteracting = false;
-                
-                this.init();
-            }
+        constructor() {
+            this.track = document.getElementById('testimonials-track');
+            this.prevBtn = document.getElementById('prevBtn');
+            this.nextBtn = document.getElementById('nextBtn');
+            this.dotsContainer = document.getElementById('sliderDots');
+            this.autoPlayProgress = document.getElementById('autoPlayProgress');
 
-            init() {
-                this.createDots();
-                this.bindEvents();
-                this.updateSlider();
-                this.startAutoPlay();
-                this.addTouchSupport();
-            }
+            this.currentIndex = 0;
+            this.cardWidth = 380 + 32; // Card width + gap
+            this.visibleCards = this.getVisibleCards();
+            this.totalCards = this.track.children.length;
+            this.maxIndex = Math.max(0, this.totalCards - this.visibleCards);
 
-            getVisibleCards() {
-                const containerWidth = this.track.parentElement.offsetWidth;
-                return Math.floor(containerWidth / this.cardWidth) || 1;
-            }
+            this.autoPlayInterval = null;
+            this.autoPlayDuration = 4000;
+            this.isUserInteracting = false;
 
-            createDots() {
-                this.dotsContainer.innerHTML = '';
-                const totalDots = this.maxIndex + 1;
-                
-                for (let i = 0; i < totalDots; i++) {
-                    const dot = document.createElement('div');
-                    dot.classList.add('dot');
-                    if (i === 0) dot.classList.add('active');
-                    dot.addEventListener('click', () => this.goToSlide(i));
-                    this.dotsContainer.appendChild(dot);
-                }
-            }
+            this.init();
+        }
 
-            bindEvents() {
-                this.prevBtn.addEventListener('click', () => this.prevSlide());
-                this.nextBtn.addEventListener('click', () => this.nextSlide());
-                
-                // Pause auto-play on hover
-                this.track.parentElement.addEventListener('mouseenter', () => {
-                    this.isUserInteracting = true;
-                    this.pauseAutoPlay();
-                });
-                
-                this.track.parentElement.addEventListener('mouseleave', () => {
-                    this.isUserInteracting = false;
-                    this.startAutoPlay();
-                });
+        init() {
+            this.createDots();
+            this.bindEvents();
+            this.updateSlider();
+            this.startAutoPlay();
+            this.addTouchSupport();
+        }
 
-                // Handle window resize
-                window.addEventListener('resize', () => {
-                    this.visibleCards = this.getVisibleCards();
-                    this.maxIndex = Math.max(0, this.totalCards - this.visibleCards);
-                    this.currentIndex = Math.min(this.currentIndex, this.maxIndex);
-                    this.createDots();
-                    this.updateSlider();
-                });
-            }
+        getVisibleCards() {
+            const containerWidth = this.track.parentElement.offsetWidth;
+            return Math.floor(containerWidth / this.cardWidth) || 1;
+        }
 
-            addTouchSupport() {
-                let startX = 0;
-                let currentX = 0;
-                let isDragging = false;
+        createDots() {
+            this.dotsContainer.innerHTML = '';
+            const totalDots = this.maxIndex + 1;
 
-                this.track.addEventListener('touchstart', (e) => {
-                    startX = e.touches[0].clientX;
-                    isDragging = true;
-                    this.isUserInteracting = true;
-                    this.pauseAutoPlay();
-                });
-
-                this.track.addEventListener('touchmove', (e) => {
-                    if (!isDragging) return;
-                    e.preventDefault();
-                    currentX = e.touches[0].clientX;
-                });
-
-                this.track.addEventListener('touchend', () => {
-                    if (!isDragging) return;
-                    isDragging = false;
-                    
-                    const diffX = startX - currentX;
-                    const threshold = 50;
-
-                    if (diffX > threshold) {
-                        this.nextSlide();
-                    } else if (diffX < -threshold) {
-                        this.prevSlide();
-                    }
-
-                    this.isUserInteracting = false;
-                    this.startAutoPlay();
-                });
-
-                // Mouse drag support
-                let isMouseDown = false;
-                let mouseStartX = 0;
-
-                this.track.addEventListener('mousedown', (e) => {
-                    isMouseDown = true;
-                    mouseStartX = e.clientX;
-                    this.track.style.cursor = 'grabbing';
-                    this.isUserInteracting = true;
-                    this.pauseAutoPlay();
-                });
-
-                document.addEventListener('mousemove', (e) => {
-                    if (!isMouseDown) return;
-                    e.preventDefault();
-                });
-
-                document.addEventListener('mouseup', (e) => {
-                    if (!isMouseDown) return;
-                    isMouseDown = false;
-                    this.track.style.cursor = 'grab';
-                    
-                    const diffX = mouseStartX - e.clientX;
-                    const threshold = 50;
-
-                    if (diffX > threshold) {
-                        this.nextSlide();
-                    } else if (diffX < -threshold) {
-                        this.prevSlide();
-                    }
-
-                    this.isUserInteracting = false;
-                    this.startAutoPlay();
-                });
-            }
-
-            updateSlider() {
-                const translateX = -this.currentIndex * this.cardWidth;
-                this.track.style.transform = `translateX(${translateX}px)`;
-                
-                // Update dots
-                const dots = this.dotsContainer.querySelectorAll('.dot');
-                dots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === this.currentIndex);
-                });
-
-                // Update buttons
-                this.prevBtn.disabled = this.currentIndex === 0;
-                this.nextBtn.disabled = this.currentIndex === this.maxIndex;
-            }
-
-            nextSlide() {
-                if (this.currentIndex < this.maxIndex) {
-                    this.currentIndex++;
-                    this.updateSlider();
-                } else {
-                    // Loop back to beginning
-                    this.currentIndex = 0;
-                    this.updateSlider();
-                }
-            }
-
-            prevSlide() {
-                if (this.currentIndex > 0) {
-                    this.currentIndex--;
-                    this.updateSlider();
-                } else {
-                    // Loop to end
-                    this.currentIndex = this.maxIndex;
-                    this.updateSlider();
-                }
-            }
-
-            goToSlide(index) {
-                this.currentIndex = index;
-                this.updateSlider();
-                this.isUserInteracting = true;
-                this.pauseAutoPlay();
-                setTimeout(() => {
-                    this.isUserInteracting = false;
-                    this.startAutoPlay();
-                }, 2000);
-            }
-
-            startAutoPlay() {
-                if (this.autoPlayInterval || this.isUserInteracting) return;
-                
-                let progress = 0;
-                const progressStep = 100 / (this.autoPlayDuration / 50);
-                
-                this.autoPlayInterval = setInterval(() => {
-                    if (this.isUserInteracting) return;
-                    
-                    progress += progressStep;
-                    this.autoPlayProgress.style.width = `${progress}%`;
-                    
-                    if (progress >= 100) {
-                        this.nextSlide();
-                        progress = 0;
-                        this.autoPlayProgress.style.width = '0%';
-                    }
-                }, 50);
-            }
-
-            pauseAutoPlay() {
-                if (this.autoPlayInterval) {
-                    clearInterval(this.autoPlayInterval);
-                    this.autoPlayInterval = null;
-                    this.autoPlayProgress.style.width = '0%';
-                }
+            for (let i = 0; i < totalDots; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => this.goToSlide(i));
+                this.dotsContainer.appendChild(dot);
             }
         }
 
-        // Initialize slider when DOM is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            new TestimonialsSlider();
-        });</script>
+        bindEvents() {
+            this.prevBtn.addEventListener('click', () => this.prevSlide());
+            this.nextBtn.addEventListener('click', () => this.nextSlide());
+
+            // Pause auto-play on hover
+            this.track.parentElement.addEventListener('mouseenter', () => {
+                this.isUserInteracting = true;
+                this.pauseAutoPlay();
+            });
+
+            this.track.parentElement.addEventListener('mouseleave', () => {
+                this.isUserInteracting = false;
+                this.startAutoPlay();
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                this.visibleCards = this.getVisibleCards();
+                this.maxIndex = Math.max(0, this.totalCards - this.visibleCards);
+                this.currentIndex = Math.min(this.currentIndex, this.maxIndex);
+                this.createDots();
+                this.updateSlider();
+            });
+        }
+
+        addTouchSupport() {
+            let startX = 0;
+            let currentX = 0;
+            let isDragging = false;
+
+            this.track.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+                this.isUserInteracting = true;
+                this.pauseAutoPlay();
+            });
+
+            this.track.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+                currentX = e.touches[0].clientX;
+            });
+
+            this.track.addEventListener('touchend', () => {
+                if (!isDragging) return;
+                isDragging = false;
+
+                const diffX = startX - currentX;
+                const threshold = 50;
+
+                if (diffX > threshold) {
+                    this.nextSlide();
+                } else if (diffX < -threshold) {
+                    this.prevSlide();
+                }
+
+                this.isUserInteracting = false;
+                this.startAutoPlay();
+            });
+
+            // Mouse drag support
+            let isMouseDown = false;
+            let mouseStartX = 0;
+
+            this.track.addEventListener('mousedown', (e) => {
+                isMouseDown = true;
+                mouseStartX = e.clientX;
+                this.track.style.cursor = 'grabbing';
+                this.isUserInteracting = true;
+                this.pauseAutoPlay();
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isMouseDown) return;
+                e.preventDefault();
+            });
+
+            document.addEventListener('mouseup', (e) => {
+                if (!isMouseDown) return;
+                isMouseDown = false;
+                this.track.style.cursor = 'grab';
+
+                const diffX = mouseStartX - e.clientX;
+                const threshold = 50;
+
+                if (diffX > threshold) {
+                    this.nextSlide();
+                } else if (diffX < -threshold) {
+                    this.prevSlide();
+                }
+
+                this.isUserInteracting = false;
+                this.startAutoPlay();
+            });
+        }
+
+        updateSlider() {
+            const translateX = -this.currentIndex * this.cardWidth;
+            this.track.style.transform = `translateX(${translateX}px)`;
+
+            // Update dots
+            const dots = this.dotsContainer.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === this.currentIndex);
+            });
+
+            // Update buttons
+            this.prevBtn.disabled = this.currentIndex === 0;
+            this.nextBtn.disabled = this.currentIndex === this.maxIndex;
+        }
+
+        nextSlide() {
+            if (this.currentIndex < this.maxIndex) {
+                this.currentIndex++;
+                this.updateSlider();
+            } else {
+                // Loop back to beginning
+                this.currentIndex = 0;
+                this.updateSlider();
+            }
+        }
+
+        prevSlide() {
+            if (this.currentIndex > 0) {
+                this.currentIndex--;
+                this.updateSlider();
+            } else {
+                // Loop to end
+                this.currentIndex = this.maxIndex;
+                this.updateSlider();
+            }
+        }
+
+        goToSlide(index) {
+            this.currentIndex = index;
+            this.updateSlider();
+            this.isUserInteracting = true;
+            this.pauseAutoPlay();
+            setTimeout(() => {
+                this.isUserInteracting = false;
+                this.startAutoPlay();
+            }, 2000);
+        }
+
+        startAutoPlay() {
+            if (this.autoPlayInterval || this.isUserInteracting) return;
+
+            let progress = 0;
+            const progressStep = 100 / (this.autoPlayDuration / 50);
+
+            this.autoPlayInterval = setInterval(() => {
+                if (this.isUserInteracting) return;
+
+                progress += progressStep;
+                this.autoPlayProgress.style.width = `${progress}%`;
+
+                if (progress >= 100) {
+                    this.nextSlide();
+                    progress = 0;
+                    this.autoPlayProgress.style.width = '0%';
+                }
+            }, 50);
+        }
+
+        pauseAutoPlay() {
+            if (this.autoPlayInterval) {
+                clearInterval(this.autoPlayInterval);
+                this.autoPlayInterval = null;
+                this.autoPlayProgress.style.width = '0%';
+            }
+        }
+    }
+
+    // Initialize slider when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+        new TestimonialsSlider();
+    });</script>
 
 </html>
