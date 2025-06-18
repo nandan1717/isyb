@@ -462,3 +462,174 @@ document.addEventListener('DOMContentLoaded', function () {
 window.addEventListener('load', function() {
     animateStats();
 });
+// Add this to the end of your existing script.js
+// This will only initialize features if the required elements exist
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Check for each feature and only initialize if elements exist
+    
+    // Mobile Menu - only if elements exist
+    if (document.getElementById('mobile-menu-btn') && 
+        document.getElementById('mobile-menu') && 
+        document.getElementById('mobile-overlay')) {
+        initializeMobileMenu();
+    }
+    
+    // Smooth Scrolling - only if nav links exist
+    if (document.querySelectorAll('.nav-link').length > 0) {
+        initializeSmoothScrolling();
+        initializeActiveNavigation();
+    }
+    
+    // Tabs - only if tab elements exist
+    if (document.querySelectorAll('.tab-btn').length > 0 && 
+        document.querySelectorAll('.tab-content').length > 0) {
+        initializeTabs();
+    }
+    
+    // Scroll Animation - only if elements to animate exist
+    if (document.querySelectorAll('.animate-on-scroll').length > 0) {
+        initializeScrollAnimation();
+    }
+    
+    // Scroll to Top - only if button exists
+    if (document.getElementById('scroll-top')) {
+        initializeScrollToTop();
+    }
+    
+    // Contact Form - only if form exists
+    if (document.getElementById('contact-form')) {
+        initializeContactForm();
+    }
+    
+    // Projects Filter - only if filter elements exist
+    if (document.getElementById('searchInput') && 
+        document.getElementById('categorySelect') && 
+        document.querySelectorAll('.project-card').length > 0) {
+        initializeProjectsFilter();
+    }
+    
+    // Service Cards - only if they exist
+    if (document.querySelectorAll('.service-card').length > 0) {
+        initializeServiceCards();
+    }
+    
+    // Project Cards - only if they exist
+    if (document.querySelectorAll('.project-card').length > 0) {
+        initializeProjectCards();
+    }
+    
+    // Always initialize these as they don't require specific elements
+    preloadImages();
+});
+
+// Stats animation - only if stat numbers exist
+window.addEventListener('load', function() {
+    if (document.querySelectorAll('.stat-number').length > 0) {
+        animateStats();
+    }
+});
+ class ProjectCarousel {
+            constructor(container) {
+                this.container = container;
+                this.track = container.querySelector('.carousel-track');
+                this.slides = container.querySelectorAll('.carousel-slide');
+                this.prevBtn = container.querySelector('.carousel-prev');
+                this.nextBtn = container.querySelector('.carousel-next');
+                this.dots = container.querySelectorAll('.carousel-dot');
+                
+                this.currentSlide = 0;
+                this.totalSlides = this.slides.length;
+                
+                this.init();
+            }
+            
+            init() {
+                // Add event listeners
+                this.prevBtn.addEventListener('click', () => this.prevSlide());
+                this.nextBtn.addEventListener('click', () => this.nextSlide());
+                
+                // Add dot navigation
+                this.dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => this.goToSlide(index));
+                });
+                
+                // Auto-advance carousel (optional)
+                this.startAutoplay();
+                
+                // Pause autoplay on hover
+                this.container.addEventListener('mouseenter', () => this.stopAutoplay());
+                this.container.addEventListener('mouseleave', () => this.startAutoplay());
+            }
+            
+            updateCarousel() {
+                const translateX = -this.currentSlide * 100;
+                this.track.style.transform = `translateX(${translateX}%)`;
+                
+                // Update dots
+                this.dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === this.currentSlide);
+                });
+            }
+            
+            nextSlide() {
+                this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+                this.updateCarousel();
+            }
+            
+            prevSlide() {
+                this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+                this.updateCarousel();
+            }
+            
+            goToSlide(index) {
+                this.currentSlide = index;
+                this.updateCarousel();
+            }
+            
+            startAutoplay() {
+                this.autoplayInterval = setInterval(() => {
+                    this.nextSlide();
+                }, 4000); // Change slide every 4 seconds
+            }
+            
+            stopAutoplay() {
+                if (this.autoplayInterval) {
+                    clearInterval(this.autoplayInterval);
+                }
+            }
+        }
+        
+        // Initialize all carousels when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            const carouselContainers = document.querySelectorAll('.carousel-container');
+            carouselContainers.forEach(container => {
+                new ProjectCarousel(container);
+            });
+        });
+        
+        // Add smooth scrolling and entrance animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all project cards for animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const projectCards = document.querySelectorAll('.project-card');
+            projectCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+                observer.observe(card);
+            });
+        });
