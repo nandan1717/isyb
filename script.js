@@ -1,79 +1,127 @@
+// Complete JavaScript for Website with Mobile Menu Fix
+// Copy and paste this entire script to replace your existing script.js
+
+// Global variables
 let lastScrollTop = 0;
-const nav = document.querySelector('nav');
+let ticking = false;
 
 // Navbar Hide/Show on Scroll
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
+function initializeNavbarScroll() {
+    const nav = document.querySelector('nav');
+    
     if (nav) {
-        if (currentScroll > lastScrollTop && currentScroll > 100) {
-            // Scrolling down — hide navbar
-            nav.style.transform = 'translateY(-100%)';
-            nav.style.transition = 'transform 0.3s ease-in-out';
-        } else {
-            // Scrolling up — show navbar
-            nav.style.transform = 'translateY(0)';
-            nav.style.transition = 'transform 0.3s ease-in-out';
-        }
-    }
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-});
+            if (currentScroll > lastScrollTop && currentScroll > 100) {
+                // Scrolling down — hide navbar
+                nav.style.transform = 'translateY(-100%)';
+                nav.style.transition = 'transform 0.3s ease-in-out';
+            } else {
+                // Scrolling up — show navbar
+                nav.style.transform = 'translateY(0)';
+                nav.style.transition = 'transform 0.3s ease-in-out';
+            }
+
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        });
+    }
+}
 
 // Loading Screen
-window.addEventListener('load', function () {
-    const loader = document.getElementById('loader');
-    if (loader) {
-        setTimeout(() => {
-            loader.classList.add('hidden');
-        }, 1000);
-    }
-});
+function initializeLoadingScreen() {
+    window.addEventListener('load', function () {
+        const loader = document.getElementById('loader');
+        if (loader) {
+            setTimeout(() => {
+                loader.classList.add('hidden');
+            }, 1000);
+        }
+    });
+}
 
-// Mobile Menu Functionality
+// Mobile Menu Functionality - FIXED VERSION
 function initializeMobileMenu() {
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileOverlay = document.getElementById('mobile-overlay');
     const navLinks = document.querySelectorAll('.nav-link');
 
+    console.log('Mobile Menu Elements:', { mobileMenuBtn, mobileMenu, mobileOverlay });
+
     if (mobileMenuBtn && mobileMenu && mobileOverlay) {
         // Toggle mobile menu
-        mobileMenuBtn.addEventListener('click', function () {
-            mobileMenu.classList.toggle('active');
-            mobileOverlay.classList.toggle('active');
-
-            // Toggle hamburger/close icon
-            const icon = this.querySelector('i');
-            if (icon) {
-                if (mobileMenu.classList.contains('active')) {
-                    icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>';
-                } else {
-                    icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/></svg>';
-                }
+        mobileMenuBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            console.log('Mobile menu button clicked');
+            
+            const isActive = mobileMenu.classList.contains('active');
+            
+            if (isActive) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
             }
         });
 
         // Close mobile menu when clicking overlay
-        mobileOverlay.addEventListener('click', function () {
+        mobileOverlay.addEventListener('click', function (e) {
+            e.preventDefault();
+            console.log('Overlay clicked');
             closeMobileMenu();
         });
 
         // Close mobile menu when clicking nav links
         navLinks.forEach(link => {
             link.addEventListener('click', function () {
+                console.log('Nav link clicked');
                 closeMobileMenu();
             });
         });
 
+        // Close menu with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                closeMobileMenu();
+            }
+        });
+
+        function openMobileMenu() {
+            console.log('Opening mobile menu');
+            mobileMenu.classList.add('active');
+            mobileOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            updateMenuIcon(true);
+        }
+
         function closeMobileMenu() {
+            console.log('Closing mobile menu');
             mobileMenu.classList.remove('active');
             mobileOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+            updateMenuIcon(false);
+        }
+
+        function updateMenuIcon(isOpen) {
             const icon = mobileMenuBtn.querySelector('i');
             if (icon) {
-                icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/></svg>';
+                if (isOpen) {
+                    icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>';
+                } else {
+                    icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/></svg>';
+                }
             }
         }
+
+        console.log('Mobile menu initialized successfully');
+    } else {
+        console.error('Mobile menu elements not found:', {
+            btn: !!mobileMenuBtn,
+            menu: !!mobileMenu,
+            overlay: !!mobileOverlay
+        });
     }
 }
 
@@ -91,9 +139,12 @@ function initializeSmoothScrolling() {
                 const targetSection = document.querySelector(href);
 
                 if (targetSection) {
-                    targetSection.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    const navHeight = document.querySelector('nav')?.offsetHeight || 80;
+                    const targetPosition = targetSection.offsetTop - navHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
                     });
                 }
 
@@ -247,7 +298,7 @@ function initializeProjectsFilter() {
             let totalCount = projectCards.length;
 
             projectCards.forEach(card => {
-                const cardCategory = card.getAttribute('data-category').toLowerCase();
+                const cardCategory = card.getAttribute('data-category')?.toLowerCase() || '';
                 const cardTitle = card.querySelector('.project-title')?.textContent.toLowerCase() || '';
                 const cardSummary = card.querySelector('.project-summary')?.textContent.toLowerCase() || '';
                 const cardTag = card.querySelector('.category-tag')?.textContent.toLowerCase() || '';
@@ -396,6 +447,7 @@ function initializeServiceCards() {
     serviceCards.forEach(card => {
         card.addEventListener('mouseenter', function () {
             this.style.transform = 'translateY(-15px) scale(1.02)';
+            this.style.transition = 'transform 0.3s ease';
         });
 
         card.addEventListener('mouseleave', function () {
@@ -410,6 +462,7 @@ function initializeProjectCards() {
     projectCards.forEach(card => {
         card.addEventListener('mouseenter', function () {
             this.style.transform = 'translateY(-15px) scale(1.02)';
+            this.style.transition = 'transform 0.3s ease';
         });
 
         card.addEventListener('mouseleave', function () {
@@ -428,208 +481,216 @@ function initializeProjectCards() {
     });
 }
 
+// Project Carousel Class
+class ProjectCarousel {
+    constructor(container) {
+        this.container = container;
+        this.track = container.querySelector('.carousel-track');
+        this.slides = container.querySelectorAll('.carousel-slide');
+        this.prevBtn = container.querySelector('.carousel-prev');
+        this.nextBtn = container.querySelector('.carousel-next');
+        this.dots = container.querySelectorAll('.carousel-dot');
+        
+        this.currentSlide = 0;
+        this.totalSlides = this.slides.length;
+        
+        this.init();
+    }
+    
+    init() {
+        if (!this.track || this.totalSlides === 0) return;
+
+        // Add event listeners
+        if (this.prevBtn) {
+            this.prevBtn.addEventListener('click', () => this.prevSlide());
+        }
+        if (this.nextBtn) {
+            this.nextBtn.addEventListener('click', () => this.nextSlide());
+        }
+        
+        // Add dot navigation
+        this.dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => this.goToSlide(index));
+        });
+        
+        // Auto-advance carousel (optional)
+        this.startAutoplay();
+        
+        // Pause autoplay on hover
+        this.container.addEventListener('mouseenter', () => this.stopAutoplay());
+        this.container.addEventListener('mouseleave', () => this.startAutoplay());
+    }
+    
+    updateCarousel() {
+        const translateX = -this.currentSlide * 100;
+        this.track.style.transform = `translateX(${translateX}%)`;
+        
+        // Update dots
+        this.dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === this.currentSlide);
+        });
+    }
+    
+    nextSlide() {
+        this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+        this.updateCarousel();
+    }
+    
+    prevSlide() {
+        this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+        this.updateCarousel();
+    }
+    
+    goToSlide(index) {
+        this.currentSlide = index;
+        this.updateCarousel();
+    }
+    
+    startAutoplay() {
+        this.autoplayInterval = setInterval(() => {
+            this.nextSlide();
+        }, 4000); // Change slide every 4 seconds
+    }
+    
+    stopAutoplay() {
+        if (this.autoplayInterval) {
+            clearInterval(this.autoplayInterval);
+        }
+    }
+}
+
+// Initialize Carousels
+function initializeCarousels() {
+    const carouselContainers = document.querySelectorAll('.carousel-container');
+    carouselContainers.forEach(container => {
+        new ProjectCarousel(container);
+    });
+}
+
 // Performance optimization for scroll events
-let ticking = false;
 function updateScrollPosition() {
     // Handle scroll-based animations here
     ticking = false;
 }
 
-window.addEventListener('scroll', function () {
-    if (!ticking) {
-        requestAnimationFrame(updateScrollPosition);
-        ticking = true;
-    }
-});
+function initializeOptimizedScroll() {
+    window.addEventListener('scroll', function () {
+        if (!ticking) {
+            requestAnimationFrame(updateScrollPosition);
+            ticking = true;
+        }
+    });
+}
 
-// Initialize all functions when DOM is loaded
-document.addEventListener('DOMContentLoaded', function () {
-    // Initialize all components
+// Main initialization function
+function initializeWebsite() {
+    console.log('Initializing website...');
+
+    // Initialize core functionality
+    initializeLoadingScreen();
+    initializeNavbarScroll();
+    
+    // Initialize mobile menu (this is the fixed version)
     initializeMobileMenu();
-    initializeSmoothScrolling();
-    initializeTabs();
-    initializeScrollAnimation();
-    initializeScrollToTop();
-    initializeContactForm();
-    initializeActiveNavigation();
-    initializeProjectsFilter();
-    initializeServiceCards();
-    initializeProjectCards();
-    preloadImages();
-});
-
-// Initialize stats animation when page loads
-window.addEventListener('load', function() {
-    animateStats();
-});
-// Add this to the end of your existing script.js
-// This will only initialize features if the required elements exist
-
-document.addEventListener('DOMContentLoaded', function () {
-    // Check for each feature and only initialize if elements exist
     
-    // Mobile Menu - only if elements exist
-    if (document.getElementById('mobile-menu-btn') && 
-        document.getElementById('mobile-menu') && 
-        document.getElementById('mobile-overlay')) {
-        initializeMobileMenu();
-    }
-    
-    // Smooth Scrolling - only if nav links exist
+    // Initialize navigation
     if (document.querySelectorAll('.nav-link').length > 0) {
         initializeSmoothScrolling();
         initializeActiveNavigation();
     }
     
-    // Tabs - only if tab elements exist
-    if (document.querySelectorAll('.tab-btn').length > 0 && 
-        document.querySelectorAll('.tab-content').length > 0) {
+    // Initialize tabs if they exist
+    if (document.querySelectorAll('.tab-btn').length > 0) {
         initializeTabs();
     }
     
-    // Scroll Animation - only if elements to animate exist
+    // Initialize scroll animations
     if (document.querySelectorAll('.animate-on-scroll').length > 0) {
         initializeScrollAnimation();
     }
     
-    // Scroll to Top - only if button exists
+    // Initialize scroll to top button
     if (document.getElementById('scroll-top')) {
         initializeScrollToTop();
     }
     
-    // Contact Form - only if form exists
+    // Initialize contact form
     if (document.getElementById('contact-form')) {
         initializeContactForm();
     }
     
-    // Projects Filter - only if filter elements exist
-    if (document.getElementById('searchInput') && 
-        document.getElementById('categorySelect') && 
-        document.querySelectorAll('.project-card').length > 0) {
+    // Initialize projects filter
+    if (document.getElementById('searchInput') && document.getElementById('categorySelect')) {
         initializeProjectsFilter();
     }
     
-    // Service Cards - only if they exist
+    // Initialize card hover effects
     if (document.querySelectorAll('.service-card').length > 0) {
         initializeServiceCards();
     }
     
-    // Project Cards - only if they exist
     if (document.querySelectorAll('.project-card').length > 0) {
         initializeProjectCards();
     }
     
-    // Always initialize these as they don't require specific elements
+    // Initialize carousels
+    initializeCarousels();
+    
+    // Initialize optimized scroll
+    initializeOptimizedScroll();
+    
+    // Always run these
     preloadImages();
-});
+    
+    console.log('Website initialization complete');
+}
 
-// Stats animation - only if stat numbers exist
+// Event Listeners
+document.addEventListener('DOMContentLoaded', initializeWebsite);
+
+// Initialize stats animation when page loads
 window.addEventListener('load', function() {
     if (document.querySelectorAll('.stat-number').length > 0) {
         animateStats();
     }
 });
- class ProjectCarousel {
-            constructor(container) {
-                this.container = container;
-                this.track = container.querySelector('.carousel-track');
-                this.slides = container.querySelectorAll('.carousel-slide');
-                this.prevBtn = container.querySelector('.carousel-prev');
-                this.nextBtn = container.querySelector('.carousel-next');
-                this.dots = container.querySelectorAll('.carousel-dot');
-                
-                this.currentSlide = 0;
-                this.totalSlides = this.slides.length;
-                
-                this.init();
+
+// Add entrance animations for project cards
+document.addEventListener('DOMContentLoaded', () => {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
             }
-            
-            init() {
-                // Add event listeners
-                this.prevBtn.addEventListener('click', () => this.prevSlide());
-                this.nextBtn.addEventListener('click', () => this.nextSlide());
-                
-                // Add dot navigation
-                this.dots.forEach((dot, index) => {
-                    dot.addEventListener('click', () => this.goToSlide(index));
-                });
-                
-                // Auto-advance carousel (optional)
-                this.startAutoplay();
-                
-                // Pause autoplay on hover
-                this.container.addEventListener('mouseenter', () => this.stopAutoplay());
-                this.container.addEventListener('mouseleave', () => this.startAutoplay());
-            }
-            
-            updateCarousel() {
-                const translateX = -this.currentSlide * 100;
-                this.track.style.transform = `translateX(${translateX}%)`;
-                
-                // Update dots
-                this.dots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === this.currentSlide);
-                });
-            }
-            
-            nextSlide() {
-                this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
-                this.updateCarousel();
-            }
-            
-            prevSlide() {
-                this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
-                this.updateCarousel();
-            }
-            
-            goToSlide(index) {
-                this.currentSlide = index;
-                this.updateCarousel();
-            }
-            
-            startAutoplay() {
-                this.autoplayInterval = setInterval(() => {
-                    this.nextSlide();
-                }, 4000); // Change slide every 4 seconds
-            }
-            
-            stopAutoplay() {
-                if (this.autoplayInterval) {
-                    clearInterval(this.autoplayInterval);
-                }
-            }
-        }
-        
-        // Initialize all carousels when the page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            const carouselContainers = document.querySelectorAll('.carousel-container');
-            carouselContainers.forEach(container => {
-                new ProjectCarousel(container);
-            });
         });
-        
-        // Add smooth scrolling and entrance animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-        
-        // Observe all project cards for animation
-        document.addEventListener('DOMContentLoaded', () => {
-            const projectCards = document.querySelectorAll('.project-card');
-            projectCards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(30px)';
-                card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
-                observer.observe(card);
-            });
-        });
+    }, observerOptions);
+    
+    // Observe all project cards for animation
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+        observer.observe(card);
+    });
+});
+
+// Export functions for global access (if needed)
+window.websiteUtils = {
+    initializeMobileMenu,
+    initializeSmoothScrolling,
+    initializeTabs,
+    initializeScrollAnimation,
+    initializeScrollToTop,
+    initializeContactForm,
+    initializeActiveNavigation,
+    initializeProjectsFilter,
+    animateStats,
+    ProjectCarousel
+};
