@@ -694,3 +694,152 @@ window.websiteUtils = {
     animateStats,
     ProjectCarousel
 };
+
+
+// Testimonials Slider
+// This code handles the testimonials slider functionality, including auto-play, navigation buttons, and touch swipe
+ document.addEventListener('DOMContentLoaded', function() {
+            const track = document.getElementById('testimonials-track');
+            const cards = document.querySelectorAll('.testimonial-card');
+            const dotsContainer = document.getElementById('sliderDots');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const progressBar = document.getElementById('autoPlayProgress');
+            
+            // Calculate how many cards are visible at a time
+            const cardsPerView = Math.round(track.offsetWidth / cards[0].offsetWidth);
+            let currentIndex = 0;
+            let autoPlayInterval;
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            // Create dots
+            for (let i = 0; i < cards.length; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+            
+            const dots = document.querySelectorAll('.dot');
+            
+            // Function to update slider position
+            function updateSliderPosition() {
+                track.style.transform = `translateX(${-currentIndex * cards[0].offsetWidth - (currentIndex * 32)}px)`;
+                
+                // Update active dot
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+                
+                // Disable buttons at boundaries
+                prevBtn.disabled = currentIndex === 0;
+                nextBtn.disabled = currentIndex >= cards.length - cardsPerView;
+            }
+            
+            // Function to move to next slide
+            function nextSlide() {
+                if (currentIndex < cards.length - cardsPerView) {
+                    currentIndex++;
+                } else {
+                    // Loop back to first slide
+                    currentIndex = 0;
+                }
+                updateSliderPosition();
+            }
+            
+            // Function to move to previous slide
+            function prevSlide() {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    // Loop to last slide
+                    currentIndex = cards.length - cardsPerView;
+                }
+                updateSliderPosition();
+            }
+            
+            // Function to go to specific slide
+            function goToSlide(index) {
+                if (index >= 0 && index <= cards.length - cardsPerView) {
+                    currentIndex = index;
+                    updateSliderPosition();
+                }
+            }
+            
+            // Button event listeners
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+            
+            // Auto-play functionality
+            function startAutoPlay() {
+                autoPlayInterval = setInterval(() => {
+                    progressBar.style.width = '0%';
+                    progressBar.offsetWidth; // Trigger reflow
+                    progressBar.style.width = '100%';
+                    nextSlide();
+                }, 5000);
+                
+                // Animate progress bar
+                progressBar.style.width = '0%';
+                progressBar.offsetWidth; // Trigger reflow
+                progressBar.style.width = '100%';
+            }
+            
+            function stopAutoPlay() {
+                clearInterval(autoPlayInterval);
+            }
+            
+            // Start auto-play on load
+            startAutoPlay();
+            
+            // Pause auto-play on hover
+            track.addEventListener('mouseenter', stopAutoPlay);
+            track.addEventListener('mouseleave', startAutoPlay);
+            
+            // Touch swipe functionality for mobile
+            track.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+                stopAutoPlay();
+            });
+            
+            track.addEventListener('touchmove', e => {
+                // Prevent scrolling while swiping
+                e.preventDefault();
+            });
+            
+            track.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+                startAutoPlay();
+            });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                
+                if (touchStartX - touchEndX > swipeThreshold) {
+                    // Swipe left - next slide
+                    nextSlide();
+                } else if (touchEndX - touchStartX > swipeThreshold) {
+                    // Swipe right - previous slide
+                    prevSlide();
+                }
+            }
+            
+            // Initialize slider
+            updateSliderPosition();
+            
+            // Update on window resize
+            window.addEventListener('resize', () => {
+                // Recalculate cards per view
+                const newCardsPerView = Math.round(track.offsetWidth / cards[0].offsetWidth);
+                
+                // Adjust current index if it's now out of bounds
+                if (currentIndex > cards.length - newCardsPerView) {
+                    currentIndex = Math.max(0, cards.length - newCardsPerView);
+                }
+                
+                updateSliderPosition();
+            });
+        });
