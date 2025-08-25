@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,231 +11,312 @@
       padding: 0;
       box-sizing: border-box;
     }
-    
+
+    :root {
+      --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      --dark-gradient: linear-gradient(135deg, #434343 0%, #000000 100%);
+      --glass-bg: rgba(255, 255, 255, 0.25);
+      --glass-border: rgba(255, 255, 255, 0.18);
+      --shadow-light: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      --shadow-heavy: 0 20px 40px 0 rgba(31, 38, 135, 0.5);
+    }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background: #ffffff;
+      background-color: grey;
       min-height: 100vh;
       padding: 40px 20px;
+      position: relative;
+      overflow-x: hidden;
     }
-    
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.03)"/><circle cx="90" cy="40" r="0.5" fill="rgba(255,255,255,0.03)"/><circle cx="10" cy="80" r="0.5" fill="rgba(255,255,255,0.03)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      pointer-events: none;
+      z-index: -1;
+    }
+
     .container {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
+      position: relative;
     }
-    
+
     h1 {
-      color: #1a365d;
+      color: white;
       text-align: center;
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 30px;
-      letter-spacing: -1px;
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 40px;
+      letter-spacing: -2px;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    
+
     .controls {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 30px;
-      padding: 25px;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-      border: 1px solid #f1f5f9;
+      padding: 30px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-radius: 20px;
+      box-shadow: var(--shadow-light);
+      border: 1px solid var(--glass-border);
       flex-wrap: wrap;
       gap: 20px;
+      transition: all 0.3s ease;
     }
-    
+
+    .controls:hover {
+      background: rgba(255, 255, 255, 0.35);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-heavy);
+    }
+
     .controls-left {
       display: flex;
       align-items: center;
       gap: 20px;
       flex-wrap: wrap;
     }
-    
+
     .search-container {
       position: relative;
     }
-    
+
     .search-input {
-      padding: 12px 16px 12px 45px;
-      border: 2px solid #e2e8f0;
-      border-radius: 12px;
+      padding: 15px 20px 15px 50px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 15px;
       font-size: 14px;
       color: #2d3748;
-      background: white;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
       transition: all 0.3s ease;
-      min-width: 250px;
+      min-width: 280px;
+      font-weight: 500;
     }
-    
+
     .search-input:focus {
       outline: none;
-      border-color: #3182ce;
-      box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+      border-color: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
     }
-    
+
     .search-icon {
       position: absolute;
-      left: 15px;
+      left: 18px;
       top: 50%;
       transform: translateY(-50%);
-      color: #a0aec0;
-      font-size: 16px;
+      font-size: 18px;
+      color: #667eea;
     }
-    
+
     .clear-search {
       position: absolute;
-      right: 12px;
+      right: 15px;
       top: 50%;
       transform: translateY(-50%);
-      background: none;
+      background: rgba(102, 126, 234, 0.1);
       border: none;
-      color: #a0aec0;
+      color: #667eea;
       cursor: pointer;
-      padding: 4px;
-      border-radius: 4px;
+      padding: 8px;
+      border-radius: 8px;
       transition: all 0.2s ease;
+      font-weight: bold;
     }
-    
+
     .clear-search:hover {
-      color: #3182ce;
-      background: #f7fafc;
+      background: rgba(102, 126, 234, 0.2);
+      transform: translateY(-50%) scale(1.1);
     }
-    
+
     .sort-dropdown {
       position: relative;
       display: inline-block;
     }
-    
+
     .sort-select {
       appearance: none;
-      background: white;
-      border: 2px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 12px 40px 12px 16px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 15px;
+      padding: 15px 45px 15px 20px;
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 600;
       color: #2d3748;
       cursor: pointer;
       transition: all 0.3s ease;
-      min-width: 200px;
+      min-width: 220px;
     }
-    
+
     .sort-select:hover {
-      border-color: #3182ce;
+      border-color: rgba(255, 255, 255, 0.5);
+      transform: translateY(-1px);
     }
-    
+
     .sort-select:focus {
       outline: none;
-      border-color: #3182ce;
-      box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+      border-color: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.95);
     }
-    
+
     .sort-dropdown::after {
       content: '▼';
       position: absolute;
-      right: 12px;
+      right: 18px;
       top: 50%;
       transform: translateY(-50%);
-      color: #718096;
+      color: #667eea;
       pointer-events: none;
       font-size: 12px;
+      font-weight: bold;
     }
-    
+
     .filter-buttons {
       display: flex;
-      gap: 8px;
+      gap: 10px;
       flex-wrap: wrap;
     }
-    
+
     .filter-btn {
-      padding: 10px 18px;
-      border: 2px solid #e2e8f0;
+      padding: 12px 24px;
+      border: 2px solid rgba(255, 255, 255, 0.4);
       background: white;
-      color: #4a5568;
+      backdrop-filter: blur(10px);
+      color: black;
       border-radius: 25px;
-      font-size: 13px;
-      font-weight: 600;
+      font-size: 14px;
+      font-weight: 700;
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
-    
+
+    .filter-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: left 0.5s;
+    }
+
+    .filter-btn:hover::before {
+      left: 100%;
+    }
+
     .filter-btn:hover {
-      border-color: #3182ce;
-      background: #f7fafc;
-      transform: translateY(-1px);
+      border-color: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
     }
-    
+
     .filter-btn.active {
-      background: linear-gradient(135deg, #3182ce, #2c5282);
-      color: white;
-      border-color: #3182ce;
-      box-shadow: 0 4px 15px rgba(49, 130, 206, 0.25);
+      background: black;
+      color: #ffffff;
+      border-color: rgba(2, 2, 2, 0.9);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      text-shadow: none;
     }
-    
+
     .results-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 25px;
-      padding: 0 5px;
+      margin-bottom: 30px;
+      padding: 0 10px;
+      flex-wrap: wrap;
+      gap: 15px;
     }
-    
+
     .results-info {
-      color: #718096;
-      font-size: 14px;
-      font-weight: 500;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      background: rgba(255, 255, 255, 0.1);
+      padding: 8px 16px;
+      border-radius: 20px;
+      backdrop-filter: blur(5px);
     }
-    
+
     .view-toggle {
       display: flex;
       gap: 8px;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 4px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
     }
-    
+
     .view-btn {
-      padding: 8px 12px;
-      border: 2px solid #e2e8f0;
-      background: white;
-      color: #4a5568;
-      border-radius: 8px;
-      font-size: 12px;
+      padding: 10px 16px;
+      border: none;
+      background: transparent;
+      color: white;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
     }
-    
+
     .view-btn:hover {
-      border-color: #3182ce;
+      background: rgba(255, 255, 255, 0.2);
     }
-    
+
     .view-btn.active {
-      background: #3182ce;
-      color: white;
-      border-color: #3182ce;
+      background: rgba(248, 247, 247, 0.9);
+      color: #080808;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
-    
+
     .events-list {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 25px;
     }
-    
+
     .event-card.list-view {
       display: flex;
       flex-direction: row;
       align-items: center;
-      padding: 20px;
+      padding: 25px;
     }
-    
+
     .event-card.list-view .event-image {
-      width: 120px;
-      height: 80px;
+      width: 140px;
+      height: 100px;
       flex-shrink: 0;
-      margin-right: 20px;
+      margin-right: 25px;
+      border-radius: 12px;
     }
-    
+
     .event-card.list-view .event-content {
       padding: 0;
       flex: 1;
@@ -242,280 +324,497 @@
       justify-content: space-between;
       align-items: center;
     }
-    
+
     .event-card.list-view .event-meta {
       flex-direction: row;
-      gap: 20px;
+      gap: 25px;
       margin: 0;
     }
-    
+
     .event-card.list-view .event-actions {
       margin: 0;
       flex-shrink: 0;
     }
-    
+
     .events-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 35px;
       padding: 0 10px;
     }
-    
+
     .event-card {
-      background: white;
-      border-radius: 20px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-radius: 25px;
       overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow-light);
+      border: 1px solid var(--glass-border);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
     }
-    
-    .event-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+
+    .event-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
     }
-    
+
+    .event-card:hover::before {
+      opacity: 1;
+    }
+
+    .event-card:hover {
+      transform: translateY(-12px) rotateY(5deg);
+      box-shadow: var(--shadow-heavy);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
     .event-image {
       width: 100%;
-      height: 220px;
+      height: 240px;
       object-fit: cover;
-      transition: transform 0.3s ease;
+      transition: transform 0.4s ease;
+      filter: brightness(0.9);
     }
-    
+
     .event-card:hover .event-image {
-      transform: scale(1.05);
+      transform: scale(1.08);
+      filter: brightness(1.1);
     }
-    
+
     .event-content {
-      padding: 25px;
+      padding: 30px;
       position: relative;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
     }
-    
+
     .event-badge {
       position: absolute;
-      top: -12px;
-      right: 20px;
-      background: linear-gradient(135deg, #3182ce, #2c5282);
+      top: -15px;
+      right: 25px;
+      background: var(--primary-gradient);
       color: white;
-      padding: 8px 16px;
-      border-radius: 20px;
+      padding: 10px 20px;
+      border-radius: 25px;
       font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      box-shadow: 0 4px 15px rgba(49, 130, 206, 0.3);
-    }
-    
-    .event-badge.past {
-      background: linear-gradient(135deg, #718096, #4a5568);
-      box-shadow: 0 4px 15px rgba(113, 128, 150, 0.3);
-    }
-    
-    .event-title {
-      font-size: 1.4rem;
       font-weight: 700;
-      color: #2c3e50;
-      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+       background: var(--dark-gradient);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .event-badge.past {
+      background: var(--dark-gradient);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .event-badge.soon {
+      background: var(--secondary-gradient);
+      box-shadow: 0 8px 25px rgba(245, 87, 108, 0.4);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    .event-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #2d3748;
+      margin-bottom: 20px;
       line-height: 1.3;
       display: -webkit-box;
-     
+
       -webkit-box-orient: vertical;
       overflow: hidden;
+      text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
     }
-    
+
     .event-meta {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      margin-bottom: 20px;
+      gap: 15px;
+      margin-bottom: 25px;
     }
-    
+
     .meta-item {
       display: flex;
       align-items: center;
-      color: #7f8c8d;
+      color: #4a5568;
       font-size: 14px;
-      gap: 10px;
+      font-weight: 600;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 8px 12px;
+      border-radius: 12px;
+      backdrop-filter: blur(5px);
     }
-    
+
     .meta-icon {
-      width: 20px;
-      height: 20px;
-      background: linear-gradient(135deg, #3182ce, #2c5282);
+      width: 24px;
+      height: 24px;
+      background-color: #e0e7ff;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
-      font-size: 10px;
+      font-size: 12px;
       flex-shrink: 0;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
     }
-    
+
     .event-actions {
       display: flex;
-      gap: 12px;
+      gap: 15px;
       flex-wrap: wrap;
     }
-    
+
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 12px 20px;
-      border-radius: 12px;
+      padding: 14px 24px;
+      border-radius: 15px;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 14px;
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       border: none;
       cursor: pointer;
       flex: 1;
-      min-width: 120px;
+      min-width: 140px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      position: relative;
+      overflow: hidden;
     }
-    
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
     .btn-primary {
-      background: linear-gradient(135deg, #3182ce, #2c5282);
+      background:rgb(41, 41, 41);
       color: white;
-      box-shadow: 0 8px 20px rgba(49, 130, 206, 0.25);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+      border: 2px solid rgba(255, 255, 255, 0.2);
     }
-    
+
     .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(49, 130, 206, 0.35);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(102, 126, 234, 0.6);
+      border-color: rgba(255, 255, 255, 0.4);
     }
-    
+
     .btn-secondary {
-      background: linear-gradient(135deg, #38a169, #2f855a);
-      color: white;
-      box-shadow: 0 8px 20px rgba(56, 161, 105, 0.25);
+      background: var(--glass-bg);
+      color: rgb(10, 10, 10);
+      box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+      border: 2px solid rgba(255, 255, 255, 0.2);
     }
-    
+
     .btn-secondary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(56, 161, 105, 0.35);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(79, 172, 254, 0.6);
+      border-color: rgba(255, 255, 255, 0.4);
     }
+
     
-    .loading, .error, .no-events {
-      text-align: center;
-      color: #2d3748;
-      font-size: 1.2rem;
-      padding: 60px 20px;
-      background: rgba(247, 250, 252, 0.8);
+    
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      padding: 20px 30px;
       border-radius: 20px;
-      border: 1px solid #e2e8f0;
+      border: 1px solid var(--glass-border);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .stat-item:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-light);
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: white;
+      display: block;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 5px;
+    }
+
+    .loading,
+    .error,
+    .no-events {
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 600;
+      padding: 80px 30px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      border-radius: 25px;
+      border: 1px solid var(--glass-border);
       margin: 0 auto;
-      max-width: 500px;
+      max-width: 600px;
+      color: white;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
-    
+
     .error {
-      background: rgba(254, 242, 242, 0.8);
-      border: 1px solid #fed7d7;
-      color: #c53030;
+      background: rgba(254, 87, 87, 0.3);
+      border: 1px solid rgba(254, 87, 87, 0.5);
     }
-    
+
     .loading-spinner {
-      width: 40px;
-      height: 40px;
-      border: 4px solid #e2e8f0;
-      border-top: 4px solid #3182ce;
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top: 4px solid white;
       border-radius: 50%;
       animation: spin 1s linear infinite;
-      margin: 0 auto 20px;
+      margin: 0 auto 25px;
     }
-    
+
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
-    
-    /* Mobile Responsiveness */
+
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--success-gradient);
+      color: white;
+      padding: 15px 25px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+      z-index: 1000;
+      transform: translateX(400px);
+      transition: transform 0.3s ease;
+      font-weight: 600;
+    }
+
+    .notification.show {
+      transform: translateX(0);
+    }
+
+    /* Enhanced Mobile Responsiveness */
     @media (max-width: 768px) {
       body {
-        padding: 20px 10px;
+        padding: 20px 15px;
       }
-      
+
       h1 {
-        font-size: 2.2rem;
+        font-size: 2.5rem;
         margin-bottom: 30px;
       }
-      
+
+      .controls {
+        padding: 20px;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .controls-left {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+      }
+
+      .search-input,
+      .sort-select {
+        min-width: auto;
+        width: 100%;
+      }
+
+      .filter-buttons {
+        justify-content: center;
+      }
+
+      .results-header {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+      }
+
       .events-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 25px;
         padding: 0;
       }
-      
+
+      .stats-bar {
+        gap: 15px;
+      }
+
+      .stat-item {
+        padding: 15px 20px;
+        flex: 1;
+      }
+
+      .stat-number {
+        font-size: 1.5rem;
+      }
+
       .event-content {
-        padding: 20px;
+        padding: 25px;
       }
-      
+
       .event-title {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
       }
-      
+
       .event-actions {
         flex-direction: column;
       }
-      
+
       .btn {
         min-width: auto;
       }
+
+      .export-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
     }
-    
+
     @media (max-width: 480px) {
       .event-card {
-        border-radius: 15px;
+        border-radius: 20px;
       }
-      
+
       .event-image {
-        height: 180px;
+        height: 200px;
       }
-      
+
       .event-content {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .controls {
         padding: 15px;
       }
-      
-      h1 {
-        font-size: 1.8rem;
+
+      .filter-btn {
+        padding: 10px 16px;
+        font-size: 13px;
       }
     }
   </style>
 </head>
+
 <body>
   <div class="container">
-    <h1>✨ Upcoming Events</h1>
-    
+    <h1>✨ Proximy Events</h1>
+
+    <div class="stats-bar" id="statsBar" style="display: none;">
+      <div class="stat-item">
+        <span class="stat-number" id="totalEvents">0</span>
+        <span class="stat-label">Total Events</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" id="upcomingEvents">0</span>
+        <span class="stat-label">Upcoming</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" id="pastEvents">0</span>
+        <span class="stat-label">Past</span>
+      </div>
+    </div>
+
     <div class="controls">
       <div class="controls-left">
         <div class="search-container">
           <span class="search-icon">🔍</span>
-          <input 
-            type="text" 
-            id="searchInput" 
-            class="search-input" 
-            placeholder="Search events by name or location..."
-          >
+          <input type="text" id="searchInput" class="search-input"
+            placeholder="Search events by name, location, or description...">
           <button class="clear-search" id="clearSearch" style="display: none;">✕</button>
         </div>
-        
+
         <div class="sort-dropdown">
           <select id="sortSelect" class="sort-select">
-              <option value="Default">📅 All Events</option>
-             <option value="date-desc">📅 Upcoming Events</option>
-            <option value="date-asc">📅 Past Events</option>
+            <option value="default">📅 Smart Sort</option>
+            <option value="date-desc">📅 Newest First</option>
+            <option value="date-asc">📅 Oldest First</option>
             <option value="name-asc">🔤 Name: A to Z</option>
             <option value="name-desc">🔤 Name: Z to A</option>
+            <option value="location-asc">📍 Location: A to Z</option>
           </select>
         </div>
       </div>
-      
+
       <div class="filter-buttons">
-        <button class="filter-btn active" data-filter="all">All Events</button>
-        <button class="filter-btn" data-filter="upcoming">Upcoming</button>
-        <button class="filter-btn" data-filter="past">Past</button>
+        <button class="filter-btn active" data-filter="all">🌟 All Events</button>
+        <button class="filter-btn" data-filter="upcoming">🚀 Upcoming</button>
+        <button class="filter-btn" data-filter="past">📚 Past</button>
+        <button class="filter-btn" data-filter="soon">⚡ Starting Soon</button>
       </div>
     </div>
-    
+
     <div class="results-header">
       <div class="results-info" id="resultsInfo"></div>
       <div class="view-toggle">
@@ -523,13 +822,15 @@
         <button class="view-btn" data-view="list">☰ List</button>
       </div>
     </div>
-    
+
     <div id="events">
       <div class="loading">
         <div class="loading-spinner"></div>
         Loading amazing events...
       </div>
     </div>
+
+    <button class="export-btn" id="exportBtn" title="Export Events" style="display: none;">📊</button>
   </div>
 
   <script>
@@ -545,16 +846,25 @@
     const clearSearch = document.getElementById("clearSearch");
     const filterButtons = document.querySelectorAll(".filter-btn");
     const viewButtons = document.querySelectorAll(".view-btn");
+    const statsBar = document.getElementById("statsBar");
+    const exportBtn = document.getElementById("exportBtn");
 
     let currentView = 'grid';
     let searchTerm = '';
+    let debounceTimeout;
 
     // Event listeners
     sortSelect.addEventListener("change", handleSort);
-    searchInput.addEventListener("input", handleSearch);
+    searchInput.addEventListener("input", debounceSearch);
     clearSearch.addEventListener("click", clearSearchInput);
     filterButtons.forEach(btn => btn.addEventListener("click", handleFilter));
     viewButtons.forEach(btn => btn.addEventListener("click", handleViewChange));
+    exportBtn.addEventListener("click", exportEvents);
+
+    function debounceSearch() {
+      clearTimeout(debounceTimeout);
+      debounceTimeout = setTimeout(handleSearch, 300);
+    }
 
     function handleSearch() {
       searchTerm = searchInput.value.toLowerCase().trim();
@@ -566,6 +876,7 @@
       searchInput.value = '';
       searchTerm = '';
       clearSearch.style.display = 'none';
+      searchInput.focus();
       applyFilters();
     }
 
@@ -595,21 +906,29 @@
       if (!filter) {
         filter = document.querySelector('.filter-btn.active').dataset.filter;
       }
-      
+
       const now = new Date();
+      const oneDayFromNow = new Date(now.getTime() + (24 * 60 * 60 * 1000));
       let filtered = [...allEvents];
 
-      // Apply search filter
+      // Apply search filter with enhanced search
       if (searchTerm) {
         filtered = filtered.filter(event => {
           const name = (event.name || '').toLowerCase();
           const location = (event.location || '').toLowerCase();
-          return name.includes(searchTerm) || location.includes(searchTerm);
+          const description = (event.description || '').toLowerCase();
+          const searchTerms = searchTerm.split(' ');
+
+          return searchTerms.every(term =>
+            name.includes(term) ||
+            location.includes(term) ||
+            description.includes(term)
+          );
         });
       }
 
       // Apply date filter
-      switch(filter) {
+      switch (filter) {
         case 'upcoming':
           filtered = filtered.filter(event => {
             const eventDate = new Date(event.endTime || event.startTime);
@@ -620,6 +939,12 @@
           filtered = filtered.filter(event => {
             const eventDate = new Date(event.endTime || event.startTime);
             return eventDate < now;
+          });
+          break;
+        case 'soon':
+          filtered = filtered.filter(event => {
+            const eventDate = new Date(event.startTime || event.endTime);
+            return eventDate >= now && eventDate <= oneDayFromNow;
           });
           break;
       }
@@ -634,7 +959,23 @@
     }
 
     function sortEvents(events, sortType) {
-      switch(sortType) {
+      const now = new Date();
+
+      switch (sortType) {
+        case 'default':
+          // Smart sort: upcoming events first (by date), then past events (by date desc)
+          events.sort((a, b) => {
+            const dateA = new Date(a.endTime || a.startTime || 0);
+            const dateB = new Date(b.endTime || b.startTime || 0);
+            const aUpcoming = dateA >= now;
+            const bUpcoming = dateB >= now;
+
+            if (aUpcoming && !bUpcoming) return -1;
+            if (!aUpcoming && bUpcoming) return 1;
+            if (aUpcoming && bUpcoming) return dateA - dateB;
+            return dateB - dateA;
+          });
+          break;
         case 'date-asc':
           events.sort((a, b) => {
             const dateA = new Date(a.endTime || a.startTime || 0);
@@ -655,14 +996,122 @@
         case 'name-desc':
           events.sort((a, b) => (b.name || '').localeCompare(a.name || ''));
           break;
+        case 'location-asc':
+          events.sort((a, b) => (a.location || '').localeCompare(b.location || ''));
+          break;
       }
     }
 
     function updateResultsInfo(filter, count, search = '') {
-      let filterText = filter === 'all' ? 'all' : filter;
+      let filterText = filter === 'all' ? 'all' : filter === 'soon' ? 'starting soon' : filter;
       const eventText = count === 1 ? 'event' : 'events';
       let searchText = search ? ` matching "${search}"` : '';
       resultsInfo.textContent = `Showing ${count} ${filterText} ${eventText}${searchText}`;
+    }
+
+    function updateStats() {
+      const now = new Date();
+      const oneDayFromNow = new Date(now.getTime() + (24 * 60 * 60 * 1000));
+
+      const total = allEvents.length;
+      const upcoming = allEvents.filter(event => {
+        const eventDate = new Date(event.endTime || event.startTime);
+        return eventDate >= now;
+      }).length;
+      const past = total - upcoming;
+
+      document.getElementById('totalEvents').textContent = total;
+      document.getElementById('upcomingEvents').textContent = upcoming;
+      document.getElementById('pastEvents').textContent = past;
+
+      if (total > 0) {
+        statsBar.style.display = 'flex';
+        exportBtn.style.display = 'flex';
+      }
+    }
+
+    function getEventStatus(event) {
+      const now = new Date();
+      const oneDayFromNow = new Date(now.getTime() + (24 * 60 * 60 * 1000));
+      const eventDate = new Date(event.endTime || event.startTime);
+
+      if (eventDate < now) return 'past';
+      if (eventDate <= oneDayFromNow) return 'soon';
+      return 'upcoming';
+    }
+
+    function formatEventDate(event) {
+      if (!event.startTime && !event.endTime) return "Date TBD";
+
+      const startDate = event.startTime ? new Date(event.startTime) : null;
+      const endDate = event.endTime ? new Date(event.endTime) : null;
+
+      const options = {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      };
+
+      if (startDate && endDate) {
+        const startStr = startDate.toLocaleDateString('en-US', options);
+        const endStr = endDate.toLocaleDateString('en-US', options);
+
+        if (startDate.toDateString() === endDate.toDateString()) {
+          // Same day event
+          return `${startDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' })} ${startDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })} - ${endDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
+        } else {
+          return `${startStr} → ${endStr}`;
+        }
+      }
+
+      const dateToUse = startDate || endDate;
+      return dateToUse.toLocaleDateString('en-US', options);
+    }
+
+    function showNotification(message, type = 'success') {
+      const notification = document.createElement('div');
+      notification.className = `notification ${type}`;
+      notification.textContent = message;
+      document.body.appendChild(notification);
+
+      setTimeout(() => notification.classList.add('show'), 100);
+      setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => document.body.removeChild(notification), 300);
+      }, 3000);
+    }
+
+    function exportEvents() {
+      if (filteredEvents.length === 0) {
+        showNotification('No events to export!', 'error');
+        return;
+      }
+
+      const csvContent = [
+        ['Name', 'Start Date', 'End Date', 'Location', 'Status', 'Join URL', 'Host URL'],
+        ...filteredEvents.map(event => [
+          event.name || 'Untitled Event',
+          event.startTime || '',
+          event.endTime || '',
+          event.location || '',
+          getEventStatus(event),
+          event.joinURL || '',
+          event.hostURL || ''
+        ])
+      ].map(row => row.map(field => `"${field}"`).join(',')).join('\n');
+
+      const blob = new Blob([csvContent], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `proximy-events-${new Date().toISOString().split('T')[0]}.csv`;
+      link.click();
+      window.URL.revokeObjectURL(url);
+
+      showNotification(`Successfully exported ${filteredEvents.length} events!`);
     }
 
     function renderEvents(events) {
@@ -677,23 +1126,8 @@
       container.className = currentView === 'grid' ? 'events-grid' : 'events-list';
 
       events.forEach(event => {
-        const eventDate = new Date(event.endTime || event.startTime);
-        const now = new Date();
-        const isPast = eventDate < now;
-        
-        // Format the date
-        let dateText = "Date TBD";
-        if (event.endTime || event.startTime) {
-          const options = { 
-            weekday: 'short', 
-            month: 'short', 
-            day: 'numeric',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-          };
-          dateText = eventDate.toLocaleDateString('en-US', options);
-        }
+        const status = getEventStatus(event);
+        const dateText = formatEventDate(event);
 
         // Create action buttons
         let actionsHtml = '';
@@ -708,19 +1142,23 @@
           actionsHtml += '</div>';
         }
 
+        const badgeText = status === 'past' ? 'Past' : status === 'soon' ? 'Starting Soon' : 'Upcoming';
+        const fallbackImage = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=240&fit=crop';
+        const errorImage = 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=400&h=240&fit=crop';
+
         const card = document.createElement('div');
         card.className = `event-card ${currentView === 'list' ? 'list-view' : ''}`;
-        
+
         if (currentView === 'list') {
           card.innerHTML = `
-            <img src="${event.imageUrl || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=220&fit=crop'}" 
+            <img src="${event.imageUrl || fallbackImage}" 
                  alt="${event.name || 'Event'}" 
                  class="event-image"
-                 onerror="this.src='https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=400&h=220&fit=crop'">
+                 onerror="this.src='${errorImage}'">
             
             <div class="event-content">
               <div>
-                <div class="event-badge ${isPast ? 'past' : ''}">${isPast ? 'Past' : 'Upcoming'}</div>
+                <div class="event-badge ${status}">${badgeText}</div>
                 <h3 class="event-title">${event.name || "Amazing Event"}</h3>
                 
                 <div class="event-meta">
@@ -748,13 +1186,13 @@
           `;
         } else {
           card.innerHTML = `
-            <img src="${event.imageUrl || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=220&fit=crop'}" 
+            <img src="${event.imageUrl || fallbackImage}" 
                  alt="${event.name || 'Event'}" 
                  class="event-image"
-                 onerror="this.src='https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=400&h=220&fit=crop'">
+                 onerror="this.src='${errorImage}'">
             
             <div class="event-content">
-              <div class="event-badge ${isPast ? 'past' : ''}">${isPast ? 'Past' : 'Upcoming'}</div>
+              <div class="event-badge ${status}">${badgeText}</div>
               
               <h3 class="event-title">${event.name || "Amazing Event"}</h3>
               
@@ -783,7 +1221,7 @@
             </div>
           `;
         }
-        
+
         container.appendChild(card);
       });
 
@@ -791,33 +1229,60 @@
       eventsDiv.appendChild(container);
     }
 
-    // Initial fetch
+    // Initial fetch with enhanced error handling
     fetch(apiUrl, {
       method: "GET",
       headers: {
         "X-API-Key": "proximy-api-key-2024"
       }
     })
-    .then(response => response.json())
-    .then(data => {
-      console.log("API Response:", data);
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log("API Response:", data);
 
-      if (data.data && Array.isArray(data.data)) {
-        allEvents = data.data;
-        filteredEvents = [...allEvents];
-        
-        // Default sort by upcoming first
-        sortEvents(filteredEvents, 'date-asc');
-        renderEvents(filteredEvents);
-        updateResultsInfo('all', filteredEvents.length);
-      } else {
-        eventsDiv.innerHTML = '<div class="error">❌ Oops! Unable to load events. Please try again later.</div>';
+        if (data.data && Array.isArray(data.data)) {
+          allEvents = data.data;
+          filteredEvents = [...allEvents];
+
+          // Default smart sort
+          sortEvents(filteredEvents, 'default');
+          renderEvents(filteredEvents);
+          updateResultsInfo('all', filteredEvents.length);
+          updateStats();
+        } else {
+          throw new Error('Invalid data format received from API');
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching events:", error);
+        eventsDiv.innerHTML = '<div class="error">❌ Unable to load events. Please check your connection and try again.</div>';
+      });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.ctrlKey || e.metaKey) {
+        switch (e.key) {
+          case 'k':
+            e.preventDefault();
+            searchInput.focus();
+            break;
+          case 'e':
+            e.preventDefault();
+            if (filteredEvents.length > 0) exportEvents();
+            break;
+        }
       }
-    })
-    .catch(error => {
-      console.error("Error fetching events:", error);
-      eventsDiv.innerHTML = '<div class="error">❌ Connection failed. Please check your internet and try again.</div>';
+
+      if (e.key === 'Escape' && document.activeElement === searchInput) {
+        clearSearchInput();
+      }
     });
   </script>
 </body>
+
 </html>
