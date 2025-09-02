@@ -3,780 +3,1056 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ISupportYou - Business Solutions & Support</title>
-    <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <title>ISYB 8-Pillar Support Ecosystem</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-    <meta name="description"
-        content="ISupportYou provides personalized business solutions and support to help you thrive.">
-    <meta name="keywords" content="business solutions, support, consulting, growth, strategy">
-    <meta name="author" content="ISupportYou Team">
-    <meta property="og:title" content="ISupportYou - Business Solutions & Support">
-    <meta property="og:description" content="Empowering businesses with personalized solutions and support.">
-    <meta property="og:image" content="/icons/og-image.png">
-    <meta property="og:url" content="https://isupportyou.com">
-    <meta property="og:type" content="website">
+    <style>
+       
 
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1d4ed8;
+            --accent-color: #3b82f6;
+            --light-bg: #ffffff;
+            --section-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border-color: #e2e8f0;
+            --border-radius: 12px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --gradient: linear-gradient(135deg, #2563eb, #1d4ed8);
+            --gradient-subtle: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+      
+
+        .container {
+            padding: 0 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+
+        .section-title {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .section-description {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            line-height: 1.7;
+            max-width: 800px;
+            color: var(--text-secondary);
+            margin: 0 auto 3rem;
+        }
+
+        /* Pillars Section */
+        .pillars-section {
+            padding: 80px 0;
+            background: var(--section-bg);
+        }
+
+        .pillars-container {
+            position: relative;
+            margin-top: 3rem;
+            overflow: hidden;
+            padding: 0 2rem;
+        }
+
+        .pillars-track {
+            display: flex;
+            gap: 2rem;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            padding: 1rem 0;
+        }
+
+        .pillar-card {
+            flex: 0 0 380px;
+            background: var(--card-bg);
+            padding: 2.5rem 2rem;
+            border-radius: var(--border-radius);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            min-height: 320px;
+            touch-action: manipulation;
+            opacity: 0;
+            transform: translateX(30px);
+            animation: slideInRight 0.6s ease forwards;
+        }
+
+        @keyframes slideInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Navigation Controls */
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .carousel-controls:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .carousel-controls:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: translateY(-50%);
+        }
+
+        .carousel-controls:disabled:hover {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--text-secondary);
+            border-color: var(--border-color);
+        }
+
+        .carousel-prev {
+            left: 10px;
+        }
+
+        .carousel-next {
+            right: 10px;
+        }
+
+        /* Pagination Dots */
+        .carousel-pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .pagination-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pagination-dot.active {
+            background: var(--primary-color);
+            transform: scale(1.3);
+        }
+
+        .pagination-dot:hover {
+            background: var(--accent-color);
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .scroll-indicator::before {
+            content: '←';
+            animation: scrollHint 2s ease-in-out infinite;
+        }
+
+        .scroll-indicator::after {
+            content: '→';
+            animation: scrollHint 2s ease-in-out infinite reverse;
+        }
+
+        @keyframes scrollHint {
+
+            0%,
+            100% {
+                transform: translateX(0);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: translateX(5px);
+                opacity: 1;
+            }
+        }
+
+        .pillar-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .pillar-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .pillar-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .pillar-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .pillar-card:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .pillar-card:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+        .pillar-card:nth-child(7) {
+            animation-delay: 0.7s;
+        }
+
+        .pillar-card:nth-child(8) {
+            animation-delay: 0.8s;
+        }
+
+        /* Animated gradient background */
+        .pillar-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg,
+                    transparent,
+                    rgba(37, 99, 235, 0.08),
+                    rgba(59, 130, 246, 0.05),
+                    transparent);
+            transition: left 0.6s ease;
+            z-index: 1;
+        }
+
+        .pillar-card:hover::before {
+            left: 100%;
+        }
+
+        /* Decorative corner accent */
+        .pillar-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), transparent);
+            opacity: 0.1;
+            clip-path: polygon(100% 0, 0 0, 100% 100%);
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        .pillar-card:hover::after {
+            width: 80px;
+            height: 80px;
+            opacity: 0.15;
+        }
+
+        /* Touch and Mobile Interactions */
+        .pillar-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow:
+                0 15px 35px rgba(0, 0, 0, 0.1),
+                0 8px 20px rgba(37, 99, 235, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .pillar-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .pillar-card:hover .pillar-number {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        .pillar-title {
+            font-size: 1.6rem;
+            margin-bottom: 1.2rem;
+            color: var(--text-primary);
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+            transition: color 0.3s ease;
+        }
+
+        .pillar-card:hover .pillar-title {
+            color: var(--primary-color);
+        }
+
+        .pillar-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .pillar-card:hover .pillar-title::after {
+            width: 60px;
+        }
+
+        .pillar-partner {
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .pillar-description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+            line-height: 1.7;
+            position: relative;
+            z-index: 2;
+            transition: color 0.3s ease;
+        }
+
+        .pillar-card:hover .pillar-description {
+            color: var(--text-primary);
+        }
+
+        
+       
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 500;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .sparkle {
+            color: #ffd700;
+            font-size: 1.2em;
+            margin-right: 8px;
+        }
+
+        /* Mobile-First Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 2%;
+            }
+
+            .pillars-container {
+                padding: 0 1rem;
+            }
+
+            .pillar-card {
+                flex: 0 0 320px;
+                padding: 2rem 1.5rem;
+            }
+
+            .carousel-controls {
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 3%;
+            }
+
+            .ecosystem-header {
+                padding: 80px 0 50px;
+                min-height: 80vh;
+            }
+
+            .pillars-section {
+                padding: 50px 0;
+            }
+
+            .section-title {
+                font-size: clamp(2rem, 7vw, 3rem);
+                margin-bottom: 1rem;
+            }
+
+            .section-description {
+                font-size: clamp(0.9rem, 2vw, 1.1rem);
+                margin-bottom: 2rem;
+                padding: 0 1rem;
+            }
+
+            .pillars-container {
+                padding: 0 0.5rem;
+                margin-top: 2rem;
+            }
+
+            .pillar-card {
+                flex: 0 0 300px;
+                padding: 1.8rem 1.5rem;
+                min-height: 280px;
+            }
+
+            .pillar-number {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .pillar-title {
+                font-size: 1.4rem;
+                margin-bottom: 1rem;
+            }
+
+            .pillar-partner {
+                font-size: 0.85rem;
+                margin-bottom: 1.2rem;
+            }
+
+            .pillar-description {
+                font-size: 0.95rem;
+                margin-bottom: 1.5rem;
+                line-height: 1.6;
+            }
+
+            .btn {
+                padding: 14px 20px;
+                font-size: 1rem;
+                border-radius: 12px;
+                font-weight: 600;
+            }
+
+            .carousel-controls {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+
+            .carousel-prev {
+                left: 5px;
+            }
+
+            .carousel-next {
+                right: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 4%;
+            }
+
+            .ecosystem-header {
+                padding: 60px 0 40px;
+                min-height: 70vh;
+            }
+
+            .pillars-section {
+                padding: 40px 0;
+            }
+
+            .section-title {
+                font-size: clamp(1.8rem, 6vw, 2.5rem);
+                line-height: 1.2;
+                margin-bottom: 0.8rem;
+            }
+
+            .section-description {
+                font-size: clamp(0.85rem, 1.8vw, 1rem);
+                margin-bottom: 1.5rem;
+                padding: 0;
+            }
+
+            .pillars-container {
+                padding: 0;
+                margin-top: 1.5rem;
+            }
+
+            .pillars-track {
+                gap: 1.5rem;
+            }
+
+            .pillar-card {
+                flex: 0 0 280px;
+                padding: 1.5rem 1.2rem;
+                min-height: 260px;
+            }
+
+            .pillar-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+                margin-bottom: 1.2rem;
+            }
+
+            .pillar-title {
+                font-size: 1.25rem;
+                margin-bottom: 0.8rem;
+                line-height: 1.3;
+            }
+
+            .pillar-partner {
+                font-size: 0.8rem;
+                margin-bottom: 1rem;
+            }
+
+            .pillar-description {
+                font-size: 0.9rem;
+                margin-bottom: 1.2rem;
+                line-height: 1.5;
+            }
+
+            .btn {
+                padding: 12px 18px;
+                font-size: 0.9rem;
+                border-radius: 10px;
+                font-weight: 600;
+                min-height: 44px;
+            }
+
+            .carousel-controls {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+
+            .ecosystem-footer {
+                margin-top: 40px;
+                padding: 1.5rem 0;
+            }
+
+            .footer-text {
+                font-size: 1rem;
+                padding: 0 0.5rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .container {
+                padding: 0 3%;
+            }
+
+            .pillar-card {
+                flex: 0 0 260px;
+                padding: 1.2rem 1rem;
+            }
+
+            .pillar-title {
+                font-size: 1.2rem;
+            }
+
+            .pillar-description {
+                font-size: 0.85rem;
+            }
+
+            .btn {
+                padding: 10px 16px;
+                font-size: 0.85rem;
+                min-height: 42px;
+            }
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--light-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--border-color);
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Loading Screen -->
+    <!-- Loading Animation -->
     <div class="loader" id="loader">
         <div class="spinner"></div>
     </div>
 
-    <!-- Header Section -->
-    <header id="header">
-        <nav>
-            <a href="index.html" class="logo" style="color: black;">ISupportYou</a>
-            <ul id="nav-menu">
-                <li><a href="#header" class="nav-link active">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#services" class="nav-link">Services</a></li>
-                <li><a href="#portfolio" class="nav-link">Projects</a></li>
-               
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <button class="mobile-menu-btn" id="mobile-menu-btn">
-                <i class="fas fa-bars"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                        fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
-                    </svg></i>
-            </button>
-        </nav>
-        <div id="container">
 
-
-            <div class="header-text">
-                <h3 style="color: #fff;">Solutions and Support - YOU NEED!</h3>
-
-                <p style="color: #fff;">Our passion is to deliver personalised services and support individuals and
-                    businesses to the best of
-                    our abilities and resources, connecting them to our local and global network and partners, and
-                    empowering them to thrive worldwide!</p>
-                <div class="cta-buttons">
-                    <a href="#services" class="btn btn-primary">
-                        <i class="fas fa-rocket"></i>
-                        Explore Services
-                    </a>
-                    <a href="#contact" class="btn btn-secondary">
-                        <i class="fas fa-phone"></i>
-                        Get in Touch
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-overlay" id="mobile-overlay"></div>
-    <div class="mobile-menu" id="mobile-menu">
-        <ul>
-            <li><a href="#header" class="nav-link">Home</a></li>
-            <li><a href="#about" class="nav-link">About</a></li>
-            <li><a href="#services" class="nav-link">Services</a></li>
-            <li><a href="#portfolio" class="nav-link">Projects</a></li>
-           
-            <li><a href="#contact" class="nav-link">Contact</a></li>
-                <li><a href="proximy.html" class="nav-link">Proximy</a></li>
-        </ul>
-    </div>
-
-    <!-- About Section -->
-    <section id="about" class="section">
+    <!-- Pillars Section -->
+    <section class="pillars-section">
         <div class="container">
-            <div class="about-content animate-on-scroll">
-                <div class="about-image">
-                    <img src="images/about us.png" alt="About Us">
-                </div>
-
-                <div class="about-text">
-                    <h2>Who do we help?</h2>
-                    <p><strong>Empowering Ambitious Businesses</strong></p>
-                    <p>We support small to mid-sized businesses, startups, and entrepreneurs, providing expert guidance,
-                        resources, and strategic solutions to establish a strong foundation, drive growth and expansion,
-                        navigate challenges, and seize new opportunities. Together, let's unlock your business
-                        potential!</p>
-
-                    <div class="tab-container">
-                        <div class="tab-buttons">
-                            <button class="tab-btn active" data-tab="how-we-help">How We Help</button>
-                            <button class="tab-btn" data-tab="our-approach">Our Approach</button>
-                            <button class="tab-btn" data-tab="execution">Execution Process</button>
-                        </div>
-
-                        <div class="tab-content active" id="how-we-help">
-                            <ul>
-                                <li>
-                                    <span>Step 1: Listen</span>
-                                    We take the time to understand your business, goals, and challenges through detailed
-                                    consultations.
-                                </li>
-                                <li>
-                                    <span>Step 2: Propose Solutions</span>
-                                    We craft personalized strategies and recommendations tailored to your business
-                                    needs.
-                                </li>
-                                <li>
-                                    <span>Step 3: Implementation</span>
-                                    We work alongside you to execute the strategies, ensuring measurable outcomes and
-                                    success.
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="tab-content" id="our-approach">
-                            <ul>
-                                <li>
-                                    <span>Understanding Your Business</span>
-                                    We assess your business model, industry trends, and key pain points to create a
-                                    structured roadmap for growth.
-                                </li>
-                                <li>
-                                    <span>Strategic Planning</span>
-                                    Our team collaborates with you to develop an actionable plan, identifying necessary
-                                    resources and opportunities.
-                                </li>
-                                <li>
-                                    <span>Connecting You to the Right Resources</span>
-                                    We leverage our network and expertise to link you with the right professionals,
-                                    tools, and funding opportunities.
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="tab-content" id="execution">
-                            <ul>
-                                <li>
-                                    <span>Monitoring & Support</span>
-                                    We continuously track progress, analyze performance, and fine-tune strategies to
-                                    optimize results.
-                                </li>
-                                <li>
-                                    <span>Adaptation & Scaling</span>
-                                    Our support extends beyond implementation, helping businesses scale efficiently with
-                                    the right growth tactics.
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="section">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll">Our Services</h2>
-            <div class="services-grid">
-                <div class="service-card animate-on-scroll">
-                    <i class="fas fa-brain"></i>
-                    <h3>Transform Your Business Mindset</h3>
-                    <p>Coaching for entrepreneurial success, helping business owners develop a strong mindset, improve
-                        decision-making, and enhance leadership skills.</p>
-                </div>
-                <div class="service-card animate-on-scroll">
-                    <i class="fas fa-user-tie"></i>
-                    <h3>Build Your Personal Brand</h3>
-                    <p>Helping professionals establish their unique identity, grow their network, and stand out in
-                        competitive industries.</p>
-                </div>
-                <div class="service-card animate-on-scroll">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                    <h3>Grow with Training and Development</h3>
-                    <p>Developing essential business skills, sales training, and leadership development programs for
-                        individuals and teams.</p>
-                </div>
-                <div class="service-card animate-on-scroll">
-                    <i class="fas fa-laptop-code"></i>
-                    <h3>Total IT Solutions</h3>
-                    <p>Website development, social media management, SEO optimization, and digital marketing strategies
-                        for businesses.</p>
-                </div>
-                <div class="service-card animate-on-scroll">
-                    <i class="fas fa-bullhorn"></i>
-                    <h3>Powerful Marketing Strategies</h3>
-                    <p>Content marketing, social media advertising, and organic/paid campaigns to maximize brand
-                        visibility.</p>
-                </div>
-                <div class="service-card animate-on-scroll">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>Generate More Leads</h3>
-                    <p>Helping businesses expand their customer base by leveraging data-driven marketing and outreach
-                        strategies.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="section">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll">Our Work</h2>
-            <div class="portfolio-grid">
-                <div class="projects-grid" id="projectsGrid">
-                    <!-- Digital Solutions -->
-                    <div class="project-card" data-category="digital">
-                        <div class="carousel-container">
-                            <div class="carousel-track">
-                                <div class="carousel-slide"><img src="images/ISYB LMS/LMS ISYB (1).png" alt="Slide 1"></div>
-                                <div class="carousel-slide"><img src="images/ISYB LMS/LMS ISYB (2).png" alt="Slide 2"></div>
-                                <div class="carousel-slide"><img src="images/ISYB LMS/LMS ISYB (3).png" alt="Slide 3"></div>
-                              <!--  <div class="carousel-slide"><img src="images/project1-slide4.jpg" alt="Slide 4"></div>
-                                <div class="carousel-slide"><img src="images/project1-slide5.jpg" alt="Slide 5"></div>
-                                <div class="carousel-slide"><img src="images/project1-slide6.jpg" alt="Slide 6"></div>
-                                <div class="carousel-slide"><img src="images/project1-slide7.jpg" alt="Slide 7"></div>
-                                <div class="carousel-slide"><img src="images/project1-slide8.jpg" alt="Slide 8"></div>
-                                <div class="carousel-slide"><img src="images/project1-slide9.jpg" alt="Slide 9"></div>
-                                <div class="carousel-slide"><img src="images/project1-slide10.jpg" alt="Slide 10"></div>-->
-                            </div>
-                            <button class="carousel-nav carousel-prev">‹</button>
-                            <button class="carousel-nav carousel-next">›</button>
-                           
-                        </div>
-                        <div class="card-content">
-                            <h3 class="project-title">#ISupportYourBusiness LMS Platform</h3>
-                            <p class="project-summary">Comprehensive learning management system designed to support
-                                business
-                                growth through structured educational content and interactive modules.</p>
-                            <div class="card-footer">
-                                <span class="category-tag">Digital Solutions</span>
-                                <a href="https://www.isupportyourbusiness.com/s/store" class="see-more-btn">See More</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card 2 -->
-                    <div class="project-card" data-category="digital">
-                        <div class="carousel-container">
-                            <div class="carousel-track">
-                                <div class="carousel-slide"><img src="images/WEBSITE PROJECTS/Photo from Kaustav Ghosh(1).jpg" alt="Slide 1"></div>
-                                <div class="carousel-slide"><img src="images/WEBSITE PROJECTS/Photo from Kaustav Ghosh.jpg" alt="Slide 2"></div>
-                                <div class="carousel-slide"><img src="images/WEBSITE PROJECTS/Screenshot 2025-06-30 164333.png" alt="Slide 3"></div>
-                                <div class="carousel-slide"><img src="images/WEBSITE PROJECTS/Screenshot 2025-06-30 164356.png" alt="Slide 4"></div>
-                                <div class="carousel-slide"><img src="images/WEBSITE PROJECTS/Screenshot 2025-06-30 164412.png" alt="Slide 5"></div>
-                                <div class="carousel-slide"><img src="images/WEBSITE PROJECTS/Screenshot 2025-06-30 164433.png" alt="Slide 6"></div>
-                            <!--    <div class="carousel-slide"><img src="images/project2-slide7.jpg" alt="Slide 7"></div>
-                                <div class="carousel-slide"><img src="images/project2-slide8.jpg" alt="Slide 8"></div>
-                                <div class="carousel-slide"><img src="images/project2-slide9.jpg" alt="Slide 9"></div>
-                                <div class="carousel-slide"><img src="images/project2-slide10.jpg" alt="Slide 10"></div>-->
-                            </div>
-                            <button class="carousel-nav carousel-prev">‹</button>
-                            <button class="carousel-nav carousel-next">›</button>
-              
-                        </div>
-                        <div class="card-content">
-                            <h3 class="project-title">Website Development</h3>
-                            <p class="project-summary">Custom website solutions for Cheques and Robert Arthur, featuring
-                                responsive design and optimized user experience.</p>
-                            <div class="card-footer">
-                                <span class="category-tag">Digital Solutions</span>
-                                <a href="https://www.robertarthurs.com/" class="see-more-btn">See More</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card 3 -->
-                    <div class="project-card" data-category="media">
-                        <div class="carousel-container">
-                            <div class="carousel-track">
-                                <div class="carousel-slide"><img src="images/UNSCRIPTED BOOK/Photo from Kaustav Ghosh(1).jpg" alt="Slide 1"></div>
-                                <div class="carousel-slide"><img src="images/UNSCRIPTED BOOK/Photo from Kaustav Ghosh(2).jpg" alt="Slide 2"></div>
-                                <div class="carousel-slide"><img src="images/UNSCRIPTED BOOK/Photo from Kaustav Ghosh(3).jpg" alt="Slide 3"></div>
-                                <div class="carousel-slide"><img src="images/UNSCRIPTED BOOK/Photo from Kaustav Ghosh.jpg" alt="Slide 4"></div>
-                             <!--    <div class="carousel-slide"><img src="images/project3-slide5.jpg" alt="Slide 5"></div>
-                                <div class="carousel-slide"><img src="images/project3-slide6.jpg" alt="Slide 6"></div>
-                                <div class="carousel-slide"><img src="images/project3-slide7.jpg" alt="Slide 7"></div>
-                                <div class="carousel-slide"><img src="images/project3-slide8.jpg" alt="Slide 8"></div>
-                                <div class="carousel-slide"><img src="images/project3-slide9.jpg" alt="Slide 9"></div>
-                                <div class="carousel-slide"><img src="images/project3-slide10.jpg" alt="Slide 10"></div>-->
-                            </div>
-                            <button class="carousel-nav carousel-prev">‹</button>
-                            <button class="carousel-nav carousel-next">›</button>
-             
-                        </div>
-                        <div class="card-content">
-                            <h3 class="project-title">UNSCRIPTED 2025 Book</h3>
-                            <p class="project-summary">Groundbreaking publication exploring authentic storytelling and
-                                unfiltered perspectives in modern business and life.</p>
-                            <div class="card-footer">
-                                <span class="category-tag">Publications</span>
-                                <a href="https://www.amazon.ca/dp/B0DST9DZ4C" class="see-more-btn">See More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div style="text-align: center; ">
-                <a href="projects.html" class="btn btn-primary">See More Projects</a>
-            </div>
-        </div>
-    </section>
-    <!-- Testimonials Section -->
-    <section class="testimonials-section">
-        <div class="testimonials-container">
-            <div class="section-header">
-                <h2 class="section-title">Testimonials</h2>
-                <p class="section-description">
-                    Don't just take my word for it. See what colleagues and partners have to say about working with me.
+            <h2 class="section-title">ISYB 8-Pillar Support Ecosystem</h2>
+            <div>
+                <p class="footer-text">
+                    <span class="sparkle">✨</span>Each pillar is exclusive, curated, and aligned with ISYB's vision of
+                    helping entrepreneurs and individuals build strong brands that build businesses.
                 </p>
             </div>
-            <div class="testimonials-slider">
-                <div class="testimonials-track" id="testimonials-track">
-                    <!-- Testimonial 1: Sanjeevani Bhagat -->
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <div class="testimonial-rating">
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                            </div>
-                            <p class="testimonial-text">
-                                "Kaustav is an energetic and super enthusiastic person, he always pushes people to get
-                                out from their comfort zone and do the best. He is a great leader and will give his 100%
-                                to whatever it is. I'm sure he will not let you down whatsoever the situation is."
-                            </p>
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">SB</div>
-                            <div class="author-info">
-                                <h4>Sanjeevani Bhagat</h4>
-                                <p>Digital Marketing Specialist</p>
-                            </div>
-                        </div>
+
+            <div class="pillars-container">
+                <button class="carousel-controls carousel-prev" id="prevBtn"
+                    aria-label="Previous cards">&#8249;</button>
+                <button class="carousel-controls carousel-next" id="nextBtn" aria-label="Next cards">&#8250;</button>
+
+                <div class="pillars-track" id="pillarsTrack">
+                    <div class="pillar-card">
+                        <div class="pillar-number">1</div>
+                        <h3 class="pillar-title">Courses & Learning</h3>
+                        <div class="pillar-partner">LMS – ISYB In-House</div>
+                        <p class="pillar-description">A dedicated learning platform to help members upskill, share
+                            expertise, and monetize their knowledge.</p>
+                        <button class="btn btn-primary" onclick="handleAction('courses')">Explore Courses</button>
                     </div>
 
-                    <!-- Testimonial 2: Jay Gada -->
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <div class="testimonial-rating">
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                            </div>
-                            <p class="testimonial-text">
-                                "Motivator, Planner, Executor, Coach, Mentor, and Leader these attributes describe him
-                                perfectly. He is one of the most influential public speakers and conveys his message
-                                properly so that people always take meaningful life lessons from his speech."
-                            </p>
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">JG</div>
-                            <div class="author-info">
-                                <h4>Jay Gada</h4>
-                                <p>B2B Sales & Business Development</p>
-                            </div>
-                        </div>
+                    <div class="pillar-card">
+                        <div class="pillar-number">2</div>
+                        <h3 class="pillar-title">Events & Networking</h3>
+                        <div class="pillar-partner">Partner: Proximy</div>
+                        <p class="pillar-description">Curated online and offline events designed to connect
+                            entrepreneurs, spark collaborations, and build lasting relationships.</p>
+                        <button class="btn btn-primary" onclick="handleAction('events')">Join Events</button>
                     </div>
 
-                    <!-- Testimonial 3: Ameya Kambli -->
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <div class="testimonial-rating">
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                            </div>
-                            <p class="testimonial-text">
-                                "The zeal and enthusiasm with which Kaustav covered the seminar were astounding. There
-                                are very few people who can connect with each and every audience sitting in the crowd -
-                                confident, poised and effective in any public speaking situation."
-                            </p>
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">AK</div>
-                            <div class="author-info">
-                                <h4>Ameya Kambli</h4>
-                                <p>Data-Driven Strategist</p>
-                            </div>
-                        </div>
+                    <div class="pillar-card">
+                        <div class="pillar-number">3</div>
+                        <h3 class="pillar-title">Book Publishing & Storytelling</h3>
+                        <div class="pillar-partner">Partner: Dastan Publications</div>
+                        <p class="pillar-description">A storytelling powerhouse that helps entrepreneurs and
+                            changemakers turn their experiences into impactful published works.</p>
+                        <button class="btn btn-primary" onclick="handleAction('publishing')">Start Publishing</button>
                     </div>
 
-                    <!-- Testimonial 4: Pawan Bellubbi (1) -->
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <div class="testimonial-rating">
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                            </div>
-                            <p class="testimonial-text">
-                                "The one thing that Kaustav embodies is Optimism! He always had the zeal and drive to
-                                push through the ups and downs of any project. Kaustav has made tremendous social impact
-                                and is an inspiration to work with."
-                            </p>
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">PB</div>
-                            <div class="author-info">
-                                <h4>Pawan Bellubbi</h4>
-                                <p>Supply Chain & Category Management</p>
-                            </div>
-                        </div>
+                    <div class="pillar-card">
+                        <div class="pillar-number">4</div>
+                        <h3 class="pillar-title">AI Tools & Tech Support</h3>
+                        <div class="pillar-partner">Partner: Suhaas</div>
+                        <p class="pillar-description">Hands-on access to cutting-edge AI tools and tech support for
+                            smarter workflows, automation, and digital transformation.</p>
+                        <button class="btn btn-primary" onclick="handleAction('ai-tools')">Access AI Tools</button>
                     </div>
 
-                    <!-- Testimonial 5: Nirav Karkera -->
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <div class="testimonial-rating">
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                            </div>
-                            <p class="testimonial-text">
-                                "Kaustav is a great guy with a vision to make each day better for the world. It has
-                                always been a delight working alongside him. Key attributes include reliability,
-                                intelligence and great interpersonal skills!"
-                            </p>
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">NK</div>
-                            <div class="author-info">
-                                <h4>Nirav Karkera</h4>
-                                <p>Head of Research @ Fisdom</p>
-                            </div>
-                        </div>
+                    <div class="pillar-card">
+                        <div class="pillar-number">5</div>
+                        <h3 class="pillar-title">Coaching & Mentorship</h3>
+                        <div class="pillar-partner">#ISupportYou – ISYB In-House</div>
+                        <p class="pillar-description">Personalized guidance and mentorship programs to help
+                            entrepreneurs gain clarity, direction, and confidence in their journey.</p>
+                        <button class="btn btn-primary" onclick="handleAction('coaching')">Get Mentorship</button>
                     </div>
 
-                    <!-- Testimonial 6: Elvis Dsouza -->
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <div class="testimonial-rating">
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                            </div>
-                            <p class="testimonial-text">
-                                "I've known Kaustav since school and remember him being diligent in his work. He
-                                excelled in studies as well as extra-curricular activities. His altruistic nature is
-                                admirable and has helped him build lasting relationships."
-                            </p>
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">ED</div>
-                            <div class="author-info">
-                                <h4>Elvis Dsouza</h4>
-                                <p>Account Manager @ Fortinet</p>
-                            </div>
-                        </div>
+                    <div class="pillar-card">
+                        <div class="pillar-number">6</div>
+                        <h3 class="pillar-title">Mental Health & Emotional Wellness</h3>
+                        <div class="pillar-partner">Partner: BookMyTherapy</div>
+                        <p class="pillar-description">A safe, professional, and compassionate support system for
+                            maintaining mental well-being alongside entrepreneurial growth.</p>
+                        <button class="btn btn-primary" onclick="handleAction('wellness')">Book Support</button>
                     </div>
 
-                    <!-- Testimonial 7: Sharmin Mistry -->
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <div class="testimonial-rating">
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                            </div>
-                            <p class="testimonial-text">
-                                "Kaustav is an excellent marketer with immense knowledge about social service and
-                                branding. He is tenacious, sharp and highly passionate about his work. He leans into
-                                solving problems, not just defining them."
-                            </p>
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">SM</div>
-                            <div class="author-info">
-                                <h4>Sharmin Mistry</h4>
-                                <p>Programmatic Specialist</p>
-                            </div>
-                        </div>
+                    <div class="pillar-card">
+                        <div class="pillar-number">7</div>
+                        <h3 class="pillar-title">Marketplace & Growth Tools</h3>
+                        <div class="pillar-partner">Partner: Jayesh – ISYB Exchange</div>
+                        <p class="pillar-description">An exclusive marketplace for members to exchange services,
+                            discover resources, and accelerate growth opportunities.</p>
+                        <button class="btn btn-primary" onclick="handleAction('marketplace')">Explore
+                            Marketplace</button>
                     </div>
 
-                    <!-- Testimonial 8: Deeva Jain -->
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <div class="testimonial-rating">
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                            </div>
-                            <p class="testimonial-text">
-                                "Kaustav is a team player and incredible leader. He gives you space to grow and make
-                                decisions, but corrects you before mistakes. His communication skills are something I'm
-                                striving to achieve."
-                            </p>
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">DJ</div>
-                            <div class="author-info">
-                                <h4>Deeva Jain</h4>
-                                <p>Global Portfolio Management</p>
-                            </div>
-                        </div>
+                    <div class="pillar-card">
+                        <div class="pillar-number">8</div>
+                        <h3 class="pillar-title">Podcasts & Voice-Based Storytelling</h3>
+                        <div class="pillar-partner">Partner: Himanshi & Team</div>
+                        <p class="pillar-description">Amplifying voices through authentic conversations, interviews, and
+                            podcasts that give members a platform to be heard.</p>
+                        <button class="btn btn-primary" onclick="handleAction('podcasts')">Join Podcast</button>
                     </div>
-
-                    <!-- Testimonial 9: Tim Wagner -->
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <div class="testimonial-rating">
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                            </div>
-                            <p class="testimonial-text">
-                                "Kaustav managed to turn difficult times into a supportive community through I Support
-                                Your Business. His support network builds education and personal development to uplift
-                                and motivate members."
-                            </p>
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">TW</div>
-                            <div class="author-info">
-                                <h4>Tim Wagner</h4>
-                                <p>International Speaker & Founder</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 10: Pawan Bellubbi (2) -->
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <div class="testimonial-rating">
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                                <div class="star"><i class="fas fa-star"></i></div>
-                            </div>
-                            <p class="testimonial-text">
-                                "His optimism and zeal are infectious! Even as a young marketing exec, Kaustav had the
-                                ability to pull the entire team through challenges. He brings unique personal skills to
-                                any environment."
-                            </p>
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">PB</div>
-                            <div class="author-info">
-                                <h4>Pawan Bellubbi</h4>
-                                <p>Supply Chain Expert</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="auto-play-progress" id="autoPlayProgress"></div>
                 </div>
-
-                <div class="slider-controls">
-                    <button class="slider-btn" id="prevBtn">‹</button>
-                    <div class="slider-dots" id="sliderDots"></div>
-                    <button class="slider-btn" id="nextBtn">›</button>
-                </div>
-
-                <p class="swipe-hint"></p>
             </div>
+
+            <div class="carousel-pagination" id="pagination"></div>
+
+            <div class="scroll-indicator">Swipe or use arrows to explore all pillars</div>
+
+
+        </div>
     </section>
+     <!-- Footer -->
+        <footer class="footer" style="background-color: #222; color: #fff; padding: 40px 0; font-size: 14px;">
+            <div class="container"
+                style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px;">
 
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-        <div class="container" class="contact-section">
-            <h2 class="section-title animate-on-scroll" >Contact Us</h2>
+                <!-- About Section -->
+                <div style="flex: 1; min-width: 220px;">
+                    <h3 style="color: var(--primary-color);">ISupportYou</h3>
+                    <p>Empowering students and professionals through mentorship, community, and career support. Our
+                        mission
+                        is your success.</p>
+                </div>
 
-            <div class="contact-content">
+                <!-- Quick Links -->
+                <div style="flex: 1; min-width: 220px;">
+                    <h4 style="color: var(--primary-color);">Quick Links</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><a href="/about.html" style="color: #ccc; text-decoration: none;">About Us</a></li>
+                        <li><a href="/services.html" style="color: #ccc; text-decoration: none;">Services</a></li>
+                        <li><a href="/events.html" style="color: #ccc; text-decoration: none;">Events</a></li>
+                        <li><a href="/contact.html" style="color: #ccc; text-decoration: none;">Contact</a></li>
+                    </ul>
+                </div>
 
-                <div class="contact-info animate-on-scroll">
-                    <div class="contact-form animate-on-scroll">
-                        <h2>Get in Touch</h2>
+                <!-- Social Media -->
+                <div class="socialfooter" style="flex: 1; min-width: 220px;">
+                    <h4 style="color: var(--primary-color);">Follow Us</h4>
+                    <p>Stay connected with our community:</p>
 
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLScLUy_8-CDlDxGCeDoxsDTtt0ljJZB39GAwa1732aWDlUMX-g/viewform"
-                            target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                            Fill the Form
+
+
+
+                    <div class="social-links" style="display:contents;">
+                        <a href="mailto:hello@kaustavghosh.com" class="social-link email" target="_blank"
+                            rel="noopener noreferrer">
+                            <svg class="social-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.9.732-1.636 1.636-1.636h.91L12 10.545l9.454-6.724h.91A1.636 1.636 0 0 1 24 5.457z" />
+                            </svg>
+                            <span class="social-label"></span>
                         </a>
 
+                        <a href="https://www.linkedin.com/in/kaustav-ghosh/"
+                            class="social-link linkedin" target="_blank" rel="noopener noreferrer">
+                            <svg class="social-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                            <span class="social-label"></span>
+                        </a>
 
-
-                        <div class="social-links">
-                            <a href="mailto:hello@kaustavghosh.com" class="social-link email" target="_blank"
-                                rel="noopener noreferrer">
-                                <svg class="social-icon" viewBox="0 0 24 24">
-                                    <path
-                                        d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.9.732-1.636 1.636-1.636h.91L12 10.545l9.454-6.724h.91A1.636 1.636 0 0 1 24 5.457z" />
-                                </svg>
-                                <span class="social-label"></span>
-                            </a>
-
-                            <a href="https://www.linkedin.com/in/kaustav-ghosh/"
-                                class="social-link linkedin" target="_blank" rel="noopener noreferrer">
-                                <svg class="social-icon" viewBox="0 0 24 24">
-                                    <path
-                                        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                                </svg>
-                                <span class="social-label"></span>
-                            </a>
-
-                            <a href="https://wa.me/12507774628" class="social-link whatsapp" target="_blank"
-                                rel="noopener noreferrer">
-                                <svg class="social-icon" viewBox="0 0 24 24">
-                                    <path
-                                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.484 3.488" />
-                                </svg>
-                                <span class="social-label"></span>
-                            </a>
-                        </div>
-                        <div class="contact-item" style="margin-top: 20px;">
-
-                            <span>hello@kaustavghosh.com</span>
-                        </div>
-                        <div class="contact-item">
-
-                            <span>+1 (250) 777 4628</span>
-                        </div>
-                        <div class="contact-item">
-
-                            <span>Surrey, British Columbia, Canada</span>
-                        </div>
-
+                        <a href="https://wa.me/12507774628" class="social-link whatsapp" target="_blank"
+                            rel="noopener noreferrer">
+                            <svg class="social-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.484 3.488" />
+                            </svg>
+                            <span class="social-label"></span>
+                        </a>
                     </div>
 
 
-
-
                 </div>
-
-
-
             </div>
 
-        </div>
-        </div>
-    </section>
+            <!-- Divider -->
+            <hr style="margin: 30px auto; border-color: #444; width: 90%;">
 
-    <!-- Footer -->
-    <footer class="footer" style="background-color: #222; color: #fff; padding: 40px 0; font-size: 14px;">
-        <div class="container"
-            style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px;">
+            <!-- Bottom Credit -->
+            <div style="text-align: center;">
+                <p>&copy; 2024 ISupportYou. All rights reserved.</p>
+                <p>Designed <i class="fas fa-heart" style="color: var(--primary-color);"></i> by
 
-            <!-- About Section -->
-            <div style="flex: 1; min-width: 220px;">
-                <h3 style="color: var(--primary-color);">ISupportYou</h3>
-                <p>Empowering students and professionals through mentorship, community, and career support. Our
-                    mission
-                    is your success.</p>
-            </div>
-
-            <!-- Quick Links -->
-            <div style="flex: 1; min-width: 220px;">
-                <h4 style="color: var(--primary-color);">Quick Links</h4>
-                <ul style="list-style: none; padding: 0;">
-                    <li><a href="#about" style="color: #ccc; text-decoration: none;">About Us</a></li>
-                    <li><a href="#services" style="color: #ccc; text-decoration: none;">Services</a></li>
-                    <li><a href="#projects" style="color: #ccc; text-decoration: none;">Projects</a></li>
-                    <li><a href="#contacts" style="color: #ccc; text-decoration: none;">Contact</a></li>
-                  
-                </ul>
-            </div>
-
-            <!-- Social Media -->
-            <div class="socialfooter" style="flex: 1; min-width: 220px;">
-                <h4 style="color: var(--primary-color);">Follow Us</h4>
-                <p>Stay connected with our community:</p>
-
-
-
-
-                <div class="social-links" style="display:contents;">
-                    <a href="mailto:hello@kaustavghosh.com" class="social-link email" target="_blank"
-                        rel="noopener noreferrer">
-                        <svg class="social-icon" viewBox="0 0 24 24">
-                            <path
-                                d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.9.732-1.636 1.636-1.636h.91L12 10.545l9.454-6.724h.91A1.636 1.636 0 0 1 24 5.457z" />
-                        </svg>
-                        <span class="social-label"></span>
+                    <a href="https://www.linkedin.com/in/nandan-goyal-577b47226" target="_blank"
+                        style="color: var(--primary-color); text-decoration: none;">
+                        Nandan Goyal
+                    </a>
+                    &amp;
+                    <a href="http://www.linkedin.com/in/devendra-bisht-0521a4324" target="_blank"
+                        style="color: var(--primary-color); text-decoration: none;">
+                        Devendra Bisht
                     </a>
 
-                    <a href="https://www.linkedin.com/in/kaustav-ghosh/"
-                        class="social-link linkedin" target="_blank" rel="noopener noreferrer">
-                        <svg class="social-icon" viewBox="0 0 24 24">
-                            <path
-                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                        </svg>
-                        <span class="social-label"></span>
-                    </a>
 
-                    <a href="https://wa.me/12507774628" class="social-link whatsapp" target="_blank"
-                        rel="noopener noreferrer">
-                        <svg class="social-icon" viewBox="0 0 24 24">
-                            <path
-                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.484 3.488" />
-                        </svg>
-                        <span class="social-label"></span>
-                    </a>
-                </div>
-
-
+                </p>
             </div>
-        </div>
 
-        <!-- Divider -->
-        <hr style="margin: 30px auto; border-color: #444; width: 90%;">
+        </footer>
 
-        <!-- Bottom Credit -->
-        <div style="text-align: center;">
-            <p>&copy; 2024 ISupportYou. All rights reserved.</p>
-            <p>Designed <i class="fas fa-heart" style="color: var(--primary-color);"></i> by
+    <script>
+        // Hide loader when page loads
+        window.addEventListener('load', function () {
+            document.getElementById('loader').classList.add('hidden');
+        });
 
-                <a href="https://www.linkedin.com/in/nandan-goyal-577b47226" target="_blank"
-                    style="color: var(--primary-color); text-decoration: none;">
-                    Nandan Goyal
-                </a>
-                &amp;
-                <a href="http://www.linkedin.com/in/devendra-bisht-0521a4324" target="_blank"
-                    style="color: var(--primary-color); text-decoration: none;">
-                    Devendra Bisht
-                </a>
+        // Carousel functionality
+        const track = document.getElementById('pillarsTrack');
+        const cards = document.querySelectorAll('.pillar-card');
+        const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const pagination = document.getElementById('pagination');
 
+        let currentPosition = 0;
+        let cardWidth = cards[0].offsetWidth + 32; // width + gap
+        let visibleCards = Math.floor(track.offsetWidth / cardWidth);
+        let maxPosition = (cards.length - visibleCards) * cardWidth;
 
-            </p>
-        </div>
+        // Create pagination dots
+        for (let i = 0; i < cards.length; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('pagination-dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                goToPosition(i * cardWidth);
+                updatePagination(i);
+            });
+            pagination.appendChild(dot);
+        }
 
-    </footer>
+        function updatePagination(index) {
+            document.querySelectorAll('.pagination-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
 
+        function goToPosition(position) {
+            position = Math.max(0, Math.min(position, maxPosition));
+            track.style.transform = `translateX(-${position}px)`;
+            currentPosition = position;
 
-    <!-- Scroll to Top Button -->
-    <button class="scroll-top" id="scroll-top">
-        <i class="fas fa-chevron-up"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-arrow-up" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                    d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5" />
-            </svg></i>
-    </button>
+            // Update button states
+            prevBtn.disabled = currentPosition === 0;
+            nextBtn.disabled = currentPosition === maxPosition;
 
+            // Update pagination
+            const currentIndex = Math.round(currentPosition / cardWidth);
+            updatePagination(currentIndex);
+        }
 
+        nextBtn.addEventListener('click', () => {
+            goToPosition(currentPosition + cardWidth * Math.min(2, visibleCards));
+        });
 
+        prevBtn.addEventListener('click', () => {
+            goToPosition(currentPosition - cardWidth * Math.min(2, visibleCards));
+        });
+
+        // Handle touch events for mobile swipe
+        let startX, moveX, isDragging = false;
+
+        track.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            track.style.transition = 'none';
+        }, { passive: true });
+
+        track.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            moveX = e.touches[0].clientX;
+            const diff = startX - moveX;
+            track.style.transform = `translateX(-${currentPosition + diff}px)`;
+        }, { passive: true });
+
+        track.addEventListener('touchend', () => {
+            if (!isDragging) return;
+            isDragging = false;
+            track.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+
+            const diff = startX - moveX;
+            if (Math.abs(diff) > 50) { // Minimum swipe distance
+                if (diff > 0) {
+                    goToPosition(currentPosition + cardWidth);
+                } else {
+                    goToPosition(currentPosition - cardWidth);
+                }
+            } else {
+                goToPosition(currentPosition);
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            cardWidth = cards[0].offsetWidth + 32;
+            visibleCards = Math.floor(track.offsetWidth / cardWidth);
+            maxPosition = (cards.length - visibleCards) * cardWidth;
+            goToPosition(currentPosition);
+        });
+
+        // Initialize buttons
+        prevBtn.disabled = true;
+
+        // Enhanced mobile interactions
+        function handleAction(pillar) {
+            const button = event.target;
+
+            // Haptic feedback for mobile devices
+            if ('vibrate' in navigator) {
+                navigator.vibrate(50);
+            }
+
+            // Enhanced click animation for mobile
+            button.style.transform = 'scale(0.92)';
+            button.style.filter = 'brightness(0.9)';
+
+            setTimeout(() => {
+                button.style.transform = '';
+                button.style.filter = '';
+            }, 150);
+
+            // Handle different pillar actions
+            const actions = {
+                'courses': 'Redirecting to ISYB Learning Platform...',
+                'events': 'Connecting you with Proximy Events...',
+                'publishing': 'Opening Dastan Publications Portal...',
+                'ai-tools': 'Accessing Suhaas AI Tools Dashboard...',
+                'coaching': 'Connecting to #ISupportYou Mentorship...',
+                'wellness': 'Redirecting to BookMyTherapy Platform...',
+                'marketplace': 'Opening ISYB Exchange Marketplace...',
+                'podcasts': 'Connecting with Podcast Team...'
+            };
+
+            // Show mobile-friendly confirmation
+            if (confirm(actions[pillar] || 'Feature coming soon!')) {
+                // Here you would typically redirect to the actual URL
+                console.log(`Navigating to ${pillar} section`);
+            }
+        }
+
+        // Mobile-optimized intersection observer
+        const observerOptions = {
+            threshold: window.innerWidth < 768 ? 0.05 : 0.1,
+            rootMargin: window.innerWidth < 768 ? '0px 0px -30px 0px' : '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.pillar-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Mobile performance optimization
+        if (window.innerWidth < 768) {
+            // Reduce animation complexity on mobile
+            document.documentElement.style.setProperty('--animation-duration', '0.3s');
+
+            // Optimize card hover effects for touch
+            document.querySelectorAll('.pillar-card').forEach(card => {
+                card.addEventListener('touchstart', function () {
+                    this.classList.add('mobile-active');
+                }, { passive: true });
+
+                card.addEventListener('touchend', function () {
+                    setTimeout(() => {
+                        this.classList.remove('mobile-active');
+                    }, 300);
+                }, { passive: true });
+            });
+        }
+
+        // Add smooth scrolling behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
-    crossorigin="anonymous"></script>
-<script src="script.js"></script>
 
 </html>
