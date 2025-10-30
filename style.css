@@ -141,6 +141,24 @@ nav {
     text-decoration: none;
 }
 
+
+.logo-img {
+    height: 40px;
+    width: auto;
+}
+
+.logo-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.ecosystem-logo {
+    max-width: 200px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
 nav ul {
     display: flex;
     list-style: none;
@@ -964,7 +982,7 @@ nav ul li a:hover {
     right: 2rem;
     width: 50px;
     height: 50px;
-    background: var(--primary-color);
+    background: var(--accent-color);
     color: var(--secondary-color);
     border: none;
     border-radius: 50%;
@@ -985,7 +1003,7 @@ nav ul li a:hover {
 .scroll-top:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-lg);
-    background: var(--accent-green);
+    background: var(--primary-color);
 }
 
 /* Success Message */
@@ -1273,7 +1291,7 @@ textarea:focus {
 }
 
 .category-tag {
-    background: var(--accent-green);
+    background: var(--primary-color);
     color: white;
     padding: 0.3rem 0.8rem;
     border-radius: 15px;
@@ -1282,7 +1300,7 @@ textarea:focus {
 }
 
 .see-more-btn {
-    background: var(--primary-color);
+    background: var(--accent-color);
     color: var(--secondary-color);
     padding: 0.6rem 1.2rem;
     border: none;
@@ -1296,7 +1314,7 @@ textarea:focus {
 
 .see-more-btn:hover {
     transform: translateY(-2px);
-    background: var(--accent-green);
+    background: var(--primary-color);
     color: white;
     box-shadow: 0 5px 15px rgba(0, 168, 107, 0.4);
 }
@@ -2045,7 +2063,7 @@ textarea:focus {
         .pillar-card:nth-child(5) { animation-delay: 0.5s; }
         .pillar-card:nth-child(6) { animation-delay: 0.6s; }
         .pillar-card:nth-child(7) { animation-delay: 0.7s; }
-        .pillar-card:nth-child(8) { animation-delay: 0.8s; }
+       
         .pillar-card::before {
             content: '';
             position: absolute;
@@ -2132,7 +2150,7 @@ textarea:focus {
             position: relative;
             z-index: 2;
         }
-         .btn-primary { background: var(--primary-color); color: var(--accent-color); box-shadow: 0 2px 8px rgba(0, 31, 84, 0.2); }
+        .btn-primary { background: var(--primary-color); color: var(--accent-color); box-shadow: 0 2px 8px rgba(0, 31, 84, 0.2); }
         .btn-primary:hover { background: var(--secondary-color); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 31, 84, 0.3); }
         .carousel-controls {
             position: absolute;
@@ -2176,7 +2194,64 @@ textarea:focus {
         }
 
 
+.footer {
+    background-color: #222;
+    color: #fff;
+    padding: 40px 0;
+    font-size: 14px;
+}
 
+.footer .container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.footer .container > div {
+    flex: 1;
+    min-width: 220px;
+}
+
+.footer h3,
+.footer h4 {
+    color: var(--accent-color);
+}
+
+.footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer ul li a {
+    color: #ccc;
+    text-decoration: none;
+}
+
+.footer .socialfooter .social-links {
+    display: contents;
+}
+
+.footer hr {
+    margin: 30px auto;
+    border-color: #444;
+    width: 90%;
+}
+
+.footer .footer-bottom {
+    text-align: center;
+}
+
+.footer .footer-bottom .fas.fa-heart {
+    color: var(--primary-color);
+}
+
+.footer .footer-bottom a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
 
 
 
